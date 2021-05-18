@@ -19,69 +19,70 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Register"),
-      //   centerTitle: true,
-      //   elevation: 0,
-      // ),
       resizeToAvoidBottomInset: true,
       body: Container(
         width: double.infinity,
         height: double.infinity,
         child: Stack(
           children: [
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              child: ListView(
-                children: [
-                  Form(
+            ListView(
+              children: [
+                // Foto Logo
+                Image.asset(
+                  "assets/images/filmophile-text.png",
+                  height: 150,
+                ),
+
+                // Banner Title
+                Container(
+                  height: 2,
+                  color: filmophileOrange,
+                ),
+                Container(
+                  height: 80,
+                  margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  color: filmophileBlue,
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      fontSize: 48,
+                      color: Colors.white,
+                      fontFamily: GoogleFonts.righteous().fontFamily,
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 2,
+                  color: filmophileOrange,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Form(
                       key: _formKey,
                       child: Column(
                         children: [
-                          // Foto Logo
-                          Image.asset(
-                            "assets/images/filmophile-text.png",
-                            height: 150,
-                          ),
-
-                          // Banner Title
-                          Container(
-                            height: 2,
-                            color: filmophileOrange,
-                          ),
-                          Container(
-                            height: 80,
-                            margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                            color: filmophileBlue,
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Sign Up",
-                              style: TextStyle(
-                                fontSize: 48,
-                                color: Colors.white,
-                                fontFamily: GoogleFonts.righteous().fontFamily,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 2,
-                            color: filmophileOrange,
-                          ),
-                          Row(),
-                          // Form
                           TextFormField(
                             controller: ctrlName,
                             keyboardType: TextInputType.name,
                             decoration: InputDecoration(
                               labelText: "Username",
-                              suffixIcon: Icon(Icons.perm_identity_outlined),
+                              labelStyle: TextStyle(color: filmophileBlue),
+                              suffixIcon: Icon(
+                                Icons.perm_identity_outlined,
+                                color: filmophileBlue,
+                              ),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: filmophileBlue),
                               ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: filmophileOrange),
                               ),
+                            ),
+                            style: TextStyle(
+                              color: filmophileBlue,
+                              fontFamily: GoogleFonts.righteous().fontFamily,
+                              fontSize: 18,
                             ),
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
@@ -98,13 +99,22 @@ class _RegisterState extends State<Register> {
                             keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                               labelText: "Email",
-                              suffixIcon: Icon(Icons.email_outlined),
+                              labelStyle: TextStyle(color: filmophileBlue),
+                              suffixIcon: Icon(
+                                Icons.email_outlined,
+                                color: filmophileBlue,
+                              ),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: filmophileBlue),
                               ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: filmophileOrange),
                               ),
+                            ),
+                            style: TextStyle(
+                              color: filmophileBlue,
+                              fontFamily: GoogleFonts.righteous().fontFamily,
+                              fontSize: 18,
                             ),
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
@@ -120,21 +130,24 @@ class _RegisterState extends State<Register> {
                               }
                             },
                           ),
-                          
                           TextFormField(
                             controller: ctrlPassword,
                             obscureText: isVisible,
                             decoration: InputDecoration(
                               labelText: "Password",
+                              labelStyle: TextStyle(color: filmophileBlue),
                               suffixIcon: new GestureDetector(
                                 onTap: () {
                                   setState(() {
                                     isVisible = !isVisible;
                                   });
                                 },
-                                child: Icon(isVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off),
+                                child: Icon(
+                                  isVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: filmophileBlue,
+                                ),
                               ),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: filmophileBlue),
@@ -142,6 +155,11 @@ class _RegisterState extends State<Register> {
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: filmophileOrange),
                               ),
+                            ),
+                            style: TextStyle(
+                              color: filmophileBlue,
+                              fontFamily: GoogleFonts.righteous().fontFamily,
+                              fontSize: 18,
                             ),
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
@@ -156,14 +174,23 @@ class _RegisterState extends State<Register> {
                             controller: ctrlPasswordConfirm,
                             obscureText: true,
                             decoration: InputDecoration(
-                              labelText: "Password",
-                              suffixIcon: Icon(Icons.lock_outline),
+                              labelText: "Password Confirmation",
+                              labelStyle: TextStyle(color: filmophileBlue),
+                              suffixIcon: Icon(
+                                Icons.lock_outline,
+                                color: filmophileBlue,
+                              ),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: filmophileBlue),
                               ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: filmophileOrange),
                               ),
+                            ),
+                            style: TextStyle(
+                              color: filmophileBlue,
+                              fontFamily: GoogleFonts.righteous().fontFamily,
+                              fontSize: 18,
                             ),
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
@@ -176,7 +203,7 @@ class _RegisterState extends State<Register> {
                           SizedBox(
                             height: 24,
                           ),
-                          ElevatedButton.icon(
+                          ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 setState(() {
@@ -221,31 +248,73 @@ class _RegisterState extends State<Register> {
                                     toastLength: Toast.LENGTH_SHORT);
                               }
                             },
-                            icon: Icon(Icons.save),
-                            label: Text("Register"),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.85,
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.white,
+                                  fontFamily:
+                                      GoogleFonts.righteous().fontFamily,
+                                ),
+                              ),
+                            ),
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.deepOrange[400],
+                              primary: filmophileBlue,
                               elevation: 0,
+                              padding: EdgeInsets.all(8),
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
                             ),
                           ),
                           SizedBox(
-                            height: 24,
+                            height: 16,
                           ),
-                          GestureDetector(
-                            onTap: () {
+                          ElevatedButton(
+                            onPressed: () {
                               Navigator.pushReplacementNamed(
                                   context, Login.routeName);
                             },
-                            child: Text(
-                              "Already registered? Login.",
-                              style: TextStyle(
-                                  color: Colors.deepOrange[400], fontSize: 16),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.85,
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Log In",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.white,
+                                  fontFamily:
+                                      GoogleFonts.righteous().fontFamily,
+                                ),
+                              ),
                             ),
-                          )
+                            style: ElevatedButton.styleFrom(
+                              primary: filmophileOrange,
+                              elevation: 0,
+                              padding: EdgeInsets.all(8),
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                            ),
+                          ),
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     Navigator.pushReplacementNamed(
+                          //         context, Login.routeName);
+                          //   },
+                          //   child: Text(
+                          //     "Already registered? Login.",
+                          //     style: TextStyle(
+                          //         color: Colors.deepOrange[400], fontSize: 16),
+                          //   ),
+                          // )
                         ],
-                      ))
-                ],
-              ),
+                      )),
+                )
+              ],
             ),
             isLoading == true ? ActivityServices.loadings() : Container()
           ],

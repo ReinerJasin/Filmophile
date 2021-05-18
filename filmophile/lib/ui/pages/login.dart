@@ -16,82 +16,129 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login"),
-        centerTitle: true,
-        elevation: 0,
-      ),
       resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        padding: EdgeInsets.all(24),
         child: Stack(
           children: [
             ListView(
               children: [
-                Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        SizedBox(height: 24),
-                        Image.asset(
-                          "assets/images/logo.png",
-                          height: 50,
-                        ),
-                        SizedBox(height: 50),
-                        TextFormField(
-                          controller: ctrlEmail,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            labelText: "Email",
-                            prefixIcon: Icon(Icons.mail_outline_rounded),
-                            border: OutlineInputBorder(),
-                          ),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return "Please fill the field!";
-                            } else {
-                              if (!EmailValidator.validate(value)) {
-                                return "Email isn't valid!";
+                // Foto Logo
+                Image.asset(
+                  "assets/images/filmophile-text.png",
+                  height: 150,
+                ),
+
+                // Banner Title
+                Container(
+                  height: 2,
+                  color: filmophileOrange,
+                ),
+                Container(
+                  height: 80,
+                  margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  color: filmophileBlue,
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Log In",
+                    style: TextStyle(
+                      fontSize: 48,
+                      color: Colors.white,
+                      fontFamily: GoogleFonts.righteous().fontFamily,
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 2,
+                  color: filmophileOrange,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            controller: ctrlEmail,
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                              labelText: "Email",
+                              labelStyle: TextStyle(color: filmophileBlue),
+                              suffixIcon: Icon(
+                                Icons.email_outlined,
+                                color: filmophileBlue,
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: filmophileBlue),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: filmophileOrange),
+                              ),
+                            ),
+                            style: TextStyle(
+                              color: filmophileBlue,
+                              fontFamily: GoogleFonts.righteous().fontFamily,
+                              fontSize: 18,
+                            ),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Please fill the field!";
                               } else {
-                                return null;
+                                if (!EmailValidator.validate(value)) {
+                                  return "Email isn't valid";
+                                } else {
+                                  return null;
+                                }
                               }
-                            }
-                          },
-                        ),
-                        SizedBox(
-                          height: 24,
-                        ),
-                        TextFormField(
-                          controller: ctrlPassword,
-                          obscureText: isVisible,
-                          decoration: InputDecoration(
+                            },
+                          ),
+                          TextFormField(
+                            controller: ctrlPassword,
+                            obscureText: isVisible,
+                            decoration: InputDecoration(
                               labelText: "Password",
-                              prefixIcon: Icon(Icons.vpn_key),
-                              border: OutlineInputBorder(),
+                              labelStyle: TextStyle(color: filmophileBlue),
                               suffixIcon: new GestureDetector(
                                 onTap: () {
                                   setState(() {
                                     isVisible = !isVisible;
                                   });
                                 },
-                                child: Icon(isVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off),
-                              )),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            return value.length < 6
-                                ? "Password must have at least 6 characters!"
-                                : null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 24,
-                        ),
-                        ElevatedButton.icon(
+                                child: Icon(
+                                  isVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: filmophileBlue,
+                                ),
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: filmophileBlue),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: filmophileOrange),
+                              ),
+                            ),
+                            style: TextStyle(
+                              color: filmophileBlue,
+                              fontFamily: GoogleFonts.righteous().fontFamily,
+                              fontSize: 18,
+                            ),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              // nanti validator nya di tambah
+                              return value.length < 6
+                                  ? "Password must have at least 6 characters!"
+                                  : null;
+                            },
+                          ),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 setState(() {
@@ -116,30 +163,63 @@ class _LoginState extends State<Login> {
                                         value, Colors.red);
                                   }
                                 });
-                              } 
+                              }
                             },
-                            icon: Icon(Icons.login_rounded),
-                            label: Text("Login"),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.85,
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Log In",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.white,
+                                  fontFamily:
+                                      GoogleFonts.righteous().fontFamily,
+                                ),
+                              ),
+                            ),
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.red[300],
+                              primary: filmophileBlue,
                               elevation: 0,
-                            )),
-                        SizedBox(
-                          height: 24,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushReplacementNamed(
-                                context, Register.routeName);
-                          },
-                          child: Text(
-                            "Not registered yet? Join Now.",
-                            style: TextStyle(
-                                color: Colors.deepOrange[400], fontSize: 16),
+                              padding: EdgeInsets.all(8),
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                            ),
                           ),
-                        )
-                      ],
-                    ))
+                          SizedBox(
+                            height: 16,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                  context, Register.routeName);
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.85,
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.white,
+                                  fontFamily:
+                                      GoogleFonts.righteous().fontFamily,
+                                ),
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: filmophileOrange,
+                              elevation: 0,
+                              padding: EdgeInsets.all(8),
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                )
               ],
             ),
             isLoading == true ? ActivityServices.loadings() : Container()

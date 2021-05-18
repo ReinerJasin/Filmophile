@@ -83,14 +83,14 @@ class _MainMenuState extends State<MainMenu> {
       return Container(
         height: 8,
         width: MediaQuery.of(context).size.width / menu.length,
-        color: Color(0xffE6614C),
+        color: filmophileOrange,
         child: Text(""),
       );
     } else {
       return Container(
         height: 8,
         width: MediaQuery.of(context).size.width / menu.length,
-        color: Color(0xff164E74),
+        color: filmophileBlue,
         child: Text(""),
       );
     }
