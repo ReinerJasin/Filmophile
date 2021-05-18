@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1006245866179",
+    "project_id": "filmophile-9a1b7",
+    "storage_bucket": "filmophile-9a1b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006245866179:android:7ebf6f78195c0354e6d076",
+        "android_client_info": {
+          "package_name": "com.example.filmophile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1006245866179-jmid73it8i6rdn5jaja4ljjsrc9luofd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgBST02BH41BA5zh8C2QdqNu1lv0DvLok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1006245866179-jmid73it8i6rdn5jaja4ljjsrc9luofd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
