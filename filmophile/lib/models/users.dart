@@ -2,6 +2,7 @@ part of 'models.dart';
 
 class Users extends Equatable{
   final String uid;
+  final String profilePicture;
   final String name;
   final String phone;
   final String email;
@@ -11,6 +12,7 @@ class Users extends Equatable{
 
   Users(
     this.uid,
+    this.profilePicture,
     this.name,
     this.phone,
     this.email,
@@ -22,6 +24,7 @@ class Users extends Equatable{
   @override
   List<Object> get props => [
     uid,
+    profilePicture,
     name,
     phone,
     email,
