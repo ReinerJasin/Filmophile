@@ -20,3 +20,4 @@ part 'listdata.dart';
 part 'myaccount.dart';
 part 'splash.dart';
 part 'home.dart';
+part 'detailMovie.dart';
