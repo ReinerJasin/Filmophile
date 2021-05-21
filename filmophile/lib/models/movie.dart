@@ -5,7 +5,6 @@ class Movie {
   String judul;
   String overview;
   String backdrop;
-  String poster;
   String tanggal;
   List<dynamic> genreIds;
 
@@ -19,7 +18,6 @@ class Movie {
     this.judul,
     this.overview,
     this.backdrop,
-    this.poster,
     this.tanggal,
     this.genreIds,
     this.status,
@@ -33,10 +31,8 @@ class Movie {
       judul: object['title'],
       overview: object['overview'],
       backdrop: object['backdrop_path'],
-      poster: object['poster_path'],
       tanggal: object['release_date'],
-      genreIds: object['genre_ids'],
+      genreIds: object['genres'],
     );
   }
-
 }

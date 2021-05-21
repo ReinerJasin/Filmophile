@@ -7,10 +7,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   // Untuk API
-  List<Movie> listMovie = [];
+  List<Media> listMedia = [];
 
   //Untuk menu kategori
   List<String> categories = ["Movie", "TV Show"];
+  List<String> category = ["movie", "tv"];
   int selectedIndex = 0;
 
   //untuk menyesuaikan layar dengan gridview
@@ -20,8 +21,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     setState(() {
-      ApiServices.getMovieList().then((movies) => {
-            listMovie = movies,
+      ApiServices.getMediaList(category[selectedIndex]).then((medias) => {
+            listMedia = medias,
           });
     });
     return Scaffold(
@@ -43,7 +44,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             FutureBuilder(
-              future: ApiServices.getMovieList()
+              future: ApiServices.getMediaList(category[selectedIndex])
               // .then((movies) {
               //   // print("HEY IT'S WORKING");
               //   listMovie = movies;
@@ -66,13 +67,13 @@ class _HomeState extends State<Home> {
                         crossAxisCount: 2,
                         childAspectRatio: gridViewResolution,
                       ),
-                      itemBuilder: (context, index) => MovieCard(
-                        movie: listMovie[index],
+                      itemBuilder: (context, index) => MediaCard(
+                        media: listMedia[index],
                         press: () => Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    DetailMovie(movie: listMovie[index]))),
+                                    DetailMovie(movieId: listMedia[index].id))),
                       ),
                     ),
                   );

@@ -1,10 +1,10 @@
 part of 'widgets.dart';
 
-class MovieCard extends StatelessWidget {
-  final Movie movie;
+class MediaCard extends StatelessWidget {
+  final Media media;
   final Function press;
 
-  const MovieCard({Key key, this.movie, this.press}) : super(key: key);
+  const MediaCard({Key key, this.media, this.press}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class MovieCard extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage(
-                      Constant.IMAGE_BASE_URL + movie.poster,
+                      Constant.IMAGE_BASE_URL + media.poster,
                     ),
                     fit: BoxFit.cover),
               ),
@@ -45,7 +45,7 @@ class MovieCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    movie.judul,
+                    media.id,
                     textAlign: TextAlign.left,
                     maxLines: 1,
                     style: TextStyle(
@@ -55,7 +55,7 @@ class MovieCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    movie.tanggal,
+                    media.judul,
                     textAlign: TextAlign.start,
                     maxLines: 1,
                     style: TextStyle(

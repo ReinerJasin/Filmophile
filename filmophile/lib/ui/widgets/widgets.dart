@@ -7,4 +7,4 @@ import 'package:google_fonts/google_fonts.dart';
 
 part 'productcard.dart';
 part 'colors.dart';
-part 'movieCard.dart';
+part 'mediaCard.dart';
