@@ -13,6 +13,7 @@ class Media {
   String status; // Finished || Watching || Not Finished
   String timestamp; // 1:23:53  (hour):(minute):(second)
   String isFavorite; // True || False
+  String notes; //Description
 
   Media({
     this.id,
@@ -25,6 +26,7 @@ class Media {
     this.status,
     this.timestamp,
     this.isFavorite,
+    this.notes,
   });
 
   factory Media.createMedias(Map<String, dynamic> object, String title) {

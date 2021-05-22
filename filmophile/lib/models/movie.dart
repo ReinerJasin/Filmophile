@@ -12,6 +12,7 @@ class Movie {
   String status; // Finished || Watching || Not Finished
   String timestamp; // 1:23:53  (hour):(minute):(second)
   String isFavorite; // True || False
+  String notes; //notes
 
   Movie({
     this.id,
@@ -23,6 +24,7 @@ class Movie {
     this.status,
     this.timestamp,
     this.isFavorite,
+    this.notes,
   });
 
   factory Movie.createMovie(Map<String, dynamic> object) {
