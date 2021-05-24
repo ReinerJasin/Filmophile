@@ -11,7 +11,7 @@ class MediaCard extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Container(
-        decoration: BoxDecoration(color: Color(0xffC6dee7)),
+        decoration: BoxDecoration(color: filmophileSoftBlue),
         child: Stack(
           children: [
             // Image.network(

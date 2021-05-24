@@ -42,25 +42,11 @@ class ApiServices {
 // NOTES:
 //
   static Future<Movie> getMovieDetail(String id) async {
-
     String apiURL =
         Constant.BASE_URL + "/movie/" + id + "?api_key=" + Constant.API_KEY;
 
     var apiResult = await http.get(Uri.parse(apiURL));
     var jsonObject = json.decode(apiResult.body);
-
-    // Movie movie = new Movie(
-    //   id: jsonObject['id'],
-    //   judul: jsonObject['title'],
-    //   overview: jsonObject['overview'],
-    //   backdrop: jsonObject['id'],
-    //   tanggal: jsonObject['id'],
-    //   genreIds: jsonObject['id'],
-    // );
-
-    // List<dynamic> listMedias = (jsonObject as Map<String, dynamic>)[];
-    //   medias.add(Media.createMedias(listMedias[i], "title"));
-    // return medias;
 
     return Movie(
       id: jsonObject['id'].toString(),
@@ -72,13 +58,51 @@ class ApiServices {
     );
   }
 
+  static Future<TvShow> getTvShowDetail(String id) async {
+    String apiURL =
+        Constant.BASE_URL + "/tv/" + id + "?api_key=" + Constant.API_KEY;
+
+    var apiResult = await http.get(Uri.parse(apiURL));
+    var jsonObject = json.decode(apiResult.body);
+
+    return TvShow(
+      id: jsonObject['id'].toString(),
+      judul: jsonObject['name'],
+      overview: jsonObject['overview'],
+      backdrop: jsonObject['backdrop_path'],
+      tanggal: jsonObject['first_air_date'],
+      season: jsonObject['number_of_seasons'].toString(),
+      episode: jsonObject['number_of_episodes'].toString(),
+      genreIds: jsonObject['genres'],
+    );
+  }
+
 // getGenres(List<String> genreIds) = mengambil genre dari suatu movie dan direturn berupa List<>
 // NOTES:
 // Mungkin tidak dibutuhkan
-  // static Future<List<Genre>> getGenres(List<String> genreIds) async {}
+  static Future<String> getGenres(List<dynamic> genreIds) async {
+    // List<Genre> genreList;
+    String genreString = "";
+
+    for (int i = 0; i < genreIds.length; i++) {
+    print("debug");
+    print(genreIds[i]["name"]);
+      //mungkin bisa dipake nanti
+      // genreList.add(Genre.createGenre(genreIds[i]));
+
+      // genreString.add(genreIds[i]["name"].toString());
+      genreString += genreIds[i]["name"];
+
+      if (i != genreIds.length - 1){
+        genreString += " | ";
+      }
+    }
+
+    return genreString;
+  }
 
 // getCasts(String id) = mengambil daftar cast berupa list<cast> dengan mengirim parameter id movie
 // NOTES:
 //
-  static Future<List<Cast>> getCasts(String id) async {}
+//   static Future<List<Cast>> getCasts(String id) async {}
 }

@@ -1,13 +1,12 @@
 part of 'shared.dart';
 
 class MyTheme {
-
   static ThemeData lightTheme() {
     return ThemeData(
       primarySwatch: Colors.deepOrange,
       backgroundColor: Color(0xFFf2f2f2),
       scaffoldBackgroundColor: Color(0xFFf2f2f2),
-      primaryColor: Colors.deepOrange[400],
+      primaryColor: Colors.white,
       accentColor: Colors.deepOrange[400],
       visualDensity: VisualDensity.adaptivePlatformDensity,
       brightness: Brightness.light,

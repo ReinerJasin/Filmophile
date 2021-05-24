@@ -30,6 +30,7 @@ class _HomeState extends State<Home> {
       //   title: Text('Users'),
       // ),
       body: Container(
+        color: Colors.white,
         child: Column(
           children: [
             SizedBox(
@@ -73,7 +74,11 @@ class _HomeState extends State<Home> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    DetailMovie(movieId: listMedia[index].id))),
+                                    (category[selectedIndex] == "movie")
+                                        ? DetailMovie(
+                                            movieId: listMedia[index].id)
+                                        : DetailTv(
+                                            tvId: listMedia[index].id))),
                       ),
                     ),
                   );
@@ -96,6 +101,7 @@ class _HomeState extends State<Home> {
       child: Column(
         children: [
           Container(
+            color: Colors.transparent,
             margin: EdgeInsets.only(top: 8),
             width: MediaQuery.of(context).size.width * 0.5,
             child: Text(
@@ -103,7 +109,7 @@ class _HomeState extends State<Home> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Color(0xff015571),
+                color: filmophileBlue,
                 fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
                 fontSize: 18,
               ),
@@ -114,7 +120,7 @@ class _HomeState extends State<Home> {
             height: 4,
             width: 50,
             color:
-                selectedIndex == index ? Color(0xffE6614C) : Colors.transparent,
+                selectedIndex == index ? filmophileOrange : Colors.transparent,
           ),
         ],
       ),
