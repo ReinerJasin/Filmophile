@@ -85,8 +85,8 @@ class ApiServices {
     String genreString = "";
 
     for (int i = 0; i < genreIds.length; i++) {
-    print("debug");
-    print(genreIds[i]["name"]);
+    // print("debug");
+    // print(genreIds[i]["name"]);
       //mungkin bisa dipake nanti
       // genreList.add(Genre.createGenre(genreIds[i]));
 

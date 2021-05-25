@@ -45,7 +45,7 @@ class MediaCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    media.id,
+                    media.judul,
                     textAlign: TextAlign.left,
                     maxLines: 1,
                     style: TextStyle(
@@ -55,7 +55,7 @@ class MediaCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    media.judul,
+                    media.id,
                     textAlign: TextAlign.start,
                     maxLines: 1,
                     style: TextStyle(
