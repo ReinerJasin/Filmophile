@@ -11,11 +11,13 @@ class DetailMovie extends StatefulWidget {
 
 class _DetailMovieState extends State<DetailMovie> {
   Movie movie;
+  Movie fbMovie = new Movie();
   String judulCard = "";
   List<String> genreList;
   String genreCard = "";
   bool isFavorite = false;
   IconData iconFavorite = Icons.favorite_outline;
+  String type = "movie#";
 
   // Untuk menu
   List<String> categories = ["Progress", "Information", "Friends"];
@@ -47,12 +49,30 @@ class _DetailMovieState extends State<DetailMovie> {
           setState(() {
             // genreList = value;
             // for (int i = 0; i < genreList.length; i++) {
-              genreCard = value;
+            genreCard = value;
             // print("DEBUG 2");
             // print(genreList);
             // }
           })
         });
+
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    CollectionReference productCollection = FirebaseFirestore.instance
+        .collection("watchlists")
+        .doc(uid)
+        .collection(type + movie.id);
+
+    productCollection.get().then((value) {
+      value.docs.forEach((element) {
+        fbMovie.timestamp = element["timestamp"];
+        fbMovie.notes = element["notes"];
+      });
+      if (value.docs.length == 0) {
+        fbMovie.timestamp = "00:00:00";
+        fbMovie.notes = "No notes added!";
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(
           title: Text(
@@ -64,8 +84,14 @@ class _DetailMovieState extends State<DetailMovie> {
           iconTheme: IconThemeData(color: filmophileBlue),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.create_outlined),
-              onPressed: () => {},
+              icon: Icon(Icons.create),
+              onPressed: () => {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NontonMovie(
+                            movieId: movie.id, movieJudul: movie.judul))),
+              },
               color: filmophileBlue,
             ),
             IconButton(
@@ -203,143 +229,6 @@ class _DetailMovieState extends State<DetailMovie> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-
-            // SEASON PROGRESS
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     Row(
-            //       children: [
-            //         Text(
-            //           "1/" + tvShow.season,
-            //           style: TextStyle(
-            //             color: filmophileBlue,
-            //             fontFamily: GoogleFonts.righteous().fontFamily,
-            //             fontSize: 18,
-            //           ),
-            //         ),
-            //         Text(
-            //           " Episode(s) ",
-            //           style: TextStyle(
-            //             color: filmophileBlue,
-            //             fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
-            //             fontSize: 18,
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //     Container(
-            //       // width: 75,
-            //       // margin: EdgeInsets.only(
-            //       //     left: MediaQuery.of(context).size.width * 0.44),
-            //       child: Text(
-            //         (1 / int.parse(tvShow.season) * 100).round().toString() +
-            //             "%",
-            //         style: TextStyle(
-            //           color: filmophileBlue,
-            //           fontFamily: GoogleFonts.righteous().fontFamily,
-            //           fontSize: 18,
-            //         ),
-            //         // textAlign: TextAlign.right,
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            // Stack(
-            //   children: [
-            //     Container(
-            //       height: 8,
-            //       width: MediaQuery.of(context).size.width,
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(4),
-            //         color: filmophileGrey,
-            //       ),
-            //     ),
-            //     Container(
-            //       height: 8,
-            //       width: MediaQuery.of(context).size.width *
-            //           1 /
-            //           int.parse(tvShow.season),
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(4),
-            //         color: filmophileOrange,
-            //       ),
-            //     ),
-            //   ],
-            // ),
-
-            // SizedBox(
-            //   height: 12,
-            // ),
-
-            // // EPISODE PROGRESS
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     Row(
-            //       children: [
-            //         Text(
-            //           "1/" + tvShow.episode,
-            //           style: TextStyle(
-            //             color: filmophileBlue,
-            //             fontFamily: GoogleFonts.righteous().fontFamily,
-            //             fontSize: 18,
-            //           ),
-            //         ),
-            //         Text(
-            //           " Episode(s) ",
-            //           style: TextStyle(
-            //             color: filmophileBlue,
-            //             fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
-            //             fontSize: 18,
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //     Container(
-            //       // width: 75,
-            //       // margin: EdgeInsets.only(
-            //       //     left: MediaQuery.of(context).size.width * 0.44),
-            //       child: Text(
-            //         (1 / int.parse(tvShow.episode) * 100).round().toString() +
-            //             "%",
-            //         style: TextStyle(
-            //           color: filmophileBlue,
-            //           fontFamily: GoogleFonts.righteous().fontFamily,
-            //           fontSize: 18,
-            //         ),
-            //         // textAlign: TextAlign.right,
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            // Stack(
-            //   children: [
-            //     Container(
-            //       height: 8,
-            //       width: MediaQuery.of(context).size.width,
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(4),
-            //         color: filmophileGrey,
-            //       ),
-            //     ),
-            //     Container(
-            //       height: 8,
-            //       width: MediaQuery.of(context).size.width *
-            //           1 /
-            //           int.parse(tvShow.episode),
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(4),
-            //         color: filmophileOrange,
-            //       ),
-            //     ),
-            //   ],
-            // ),
-
-            // SizedBox(
-            //   height: 16,
-            // ),
-
             Text(
               "Timestamp",
               style: TextStyle(
@@ -351,7 +240,7 @@ class _DetailMovieState extends State<DetailMovie> {
             ),
             Container(
               child: Text(
-                "01 : 25 : 39",
+                fbMovie.timestamp,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: GoogleFonts.righteous().fontFamily,
@@ -378,7 +267,7 @@ class _DetailMovieState extends State<DetailMovie> {
             ),
             Container(
               child: Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt libero ut mi auctor, id volutpat risus tincidunt. Proin malesuada sem justo, at vestibulum lacus ornare nec.",
+                fbMovie.notes,
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontFamily: GoogleFonts.rhodiumLibre().fontFamily,

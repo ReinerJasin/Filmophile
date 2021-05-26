@@ -213,7 +213,6 @@ class _RegisterState extends State<Register> {
                                     "",
                                     "",
                                     ctrlName.text,
-                                    ctrlPasswordConfirm.text,
                                     ctrlEmail.text,
                                     ctrlPassword.text,
                                     "",

@@ -23,4 +23,5 @@ part 'splash.dart';
 part 'home.dart';
 part 'detailMovie.dart';
 part 'detailtvshow.dart';
-// part 'ayolah.dart';
+part 'nontonTv.dart';
+part 'nontonMovie.dart';

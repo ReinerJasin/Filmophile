@@ -10,11 +10,13 @@ class DetailTv extends StatefulWidget {
 
 class _DetailTvState extends State<DetailTv> {
   TvShow tvShow;
+  TvShow fbTvShow = new TvShow();
   String judulCard = "";
   List<String> genreList;
   String genreCard = "";
-  bool isFavorite = false;
+  String isFavorite = "false";
   IconData iconFavorite = Icons.favorite_outline;
+  String type = "tvshow#";
 
   // Untuk menu
   List<String> categories = ["Progress", "Information", "Friends"];
@@ -42,22 +44,35 @@ class _DetailTvState extends State<DetailTv> {
             judulCard = tvShow.judul + " (";
             judulCard += tvShow.tanggal.substring(0, 4);
             judulCard += ")";
-
-            // ApiServices.getGenres(tvShow.genreIds).then((value) => {
-            //       genreCard = value,
-            //     });
           })
         });
     ApiServices.getGenres(tvShow.genreIds).then((value) => {
           setState(() {
-            // genreList = value;
-            // for (int i = 0; i < genreList.length; i++) {
             genreCard = value;
-            // print("DEBUG 2");
-            // print(genreList);
-            // }
           })
         });
+
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    CollectionReference productCollection = FirebaseFirestore.instance
+        .collection("watchlists")
+        .doc(uid)
+        .collection(type + tvShow.id);
+
+    productCollection.get().then((value) {
+      value.docs.forEach((element) {
+        fbTvShow.season = element["current_season"];
+        fbTvShow.episode = element["current_episode"];
+        fbTvShow.timestamp = element["timestamp"];
+        fbTvShow.notes = element["notes"];
+        isFavorite = element["isFavorite"];
+      });
+      if (value.docs.length == 0) {
+        fbTvShow.season = "0";
+        fbTvShow.episode = "0";
+        fbTvShow.timestamp = "00:00:00";
+        fbTvShow.notes = "No notes added!";
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(
@@ -70,18 +85,36 @@ class _DetailTvState extends State<DetailTv> {
           iconTheme: IconThemeData(color: filmophileBlue),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.create_outlined),
-              onPressed: () => {},
+              icon: Icon(Icons.create),
+              onPressed: () => {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NontonTv(
+                              tvId: tvShow.id,
+                              tvJudul: tvShow.judul,
+                              maxSeason: tvShow.season,
+                              maxEpisode: tvShow.episode,
+                            ))),
+              },
               color: filmophileBlue,
             ),
             IconButton(
               icon: Icon(iconFavorite),
               onPressed: () => {
-                isFavorite = !isFavorite,
-                if (isFavorite)
-                  {iconFavorite = Icons.favorite}
+                print("is fave = " + isFavorite),
+                if (isFavorite == "false")
+                  {
+                    isFavorite = "true",
+                    iconFavorite = Icons.favorite,
+                    MediaServices.changeFavorite(uid, tvShow.id, type, isFavorite),
+                  }
                 else
-                  {iconFavorite = Icons.favorite_outline},
+                  {
+                    isFavorite = "false",
+                    iconFavorite = Icons.favorite_outline,
+                    MediaServices.changeFavorite(uid, tvShow.id, type, isFavorite),
+                  },
                 setState(() {}),
                 print(isFavorite)
               },
@@ -217,7 +250,7 @@ class _DetailTvState extends State<DetailTv> {
                 Row(
                   children: [
                     Text(
-                      "1/" + tvShow.season,
+                      fbTvShow.season + "/" + tvShow.season,
                       style: TextStyle(
                         color: filmophileBlue,
                         fontFamily: GoogleFonts.righteous().fontFamily,
@@ -225,7 +258,7 @@ class _DetailTvState extends State<DetailTv> {
                       ),
                     ),
                     Text(
-                      " Episode(s) ",
+                      " Season(s) ",
                       style: TextStyle(
                         color: filmophileBlue,
                         fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
@@ -239,7 +272,11 @@ class _DetailTvState extends State<DetailTv> {
                   // margin: EdgeInsets.only(
                   //     left: MediaQuery.of(context).size.width * 0.44),
                   child: Text(
-                    (1 / int.parse(tvShow.season) * 100).round().toString() +
+                    (int.parse(fbTvShow.season) /
+                                int.parse(tvShow.season) *
+                                100)
+                            .round()
+                            .toString() +
                         "%",
                     style: TextStyle(
                       color: filmophileBlue,
@@ -264,7 +301,7 @@ class _DetailTvState extends State<DetailTv> {
                 Container(
                   height: 8,
                   width: MediaQuery.of(context).size.width *
-                      1 /
+                      int.parse(fbTvShow.season) /
                       int.parse(tvShow.season),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
@@ -285,7 +322,7 @@ class _DetailTvState extends State<DetailTv> {
                 Row(
                   children: [
                     Text(
-                      "1/" + tvShow.episode,
+                      fbTvShow.episode + "/" + tvShow.episode,
                       style: TextStyle(
                         color: filmophileBlue,
                         fontFamily: GoogleFonts.righteous().fontFamily,
@@ -307,7 +344,11 @@ class _DetailTvState extends State<DetailTv> {
                   // margin: EdgeInsets.only(
                   //     left: MediaQuery.of(context).size.width * 0.44),
                   child: Text(
-                    (1 / int.parse(tvShow.episode) * 100).round().toString() +
+                    (int.parse(fbTvShow.episode) /
+                                int.parse(tvShow.episode) *
+                                100)
+                            .round()
+                            .toString() +
                         "%",
                     style: TextStyle(
                       color: filmophileBlue,
@@ -332,7 +373,7 @@ class _DetailTvState extends State<DetailTv> {
                 Container(
                   height: 8,
                   width: MediaQuery.of(context).size.width *
-                      1 /
+                      int.parse(fbTvShow.episode) /
                       int.parse(tvShow.episode),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
@@ -357,7 +398,7 @@ class _DetailTvState extends State<DetailTv> {
             ),
             Container(
               child: Text(
-                "01 : 25 : 39",
+                fbTvShow.timestamp,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: GoogleFonts.righteous().fontFamily,
@@ -384,7 +425,7 @@ class _DetailTvState extends State<DetailTv> {
             ),
             Container(
               child: Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt libero ut mi auctor, id volutpat risus tincidunt. Proin malesuada sem justo, at vestibulum lacus ornare nec.",
+                fbTvShow.notes,
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontFamily: GoogleFonts.rhodiumLibre().fontFamily,

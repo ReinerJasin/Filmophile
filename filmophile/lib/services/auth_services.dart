@@ -26,8 +26,8 @@ class AuthServices {
     await userCollection.doc(uid).set({
       'uid': uid,
       'name': users.name,
-      'phone': users.phone,
       'email': users.email,
+      'profilePicture': "",
       'password': users.password,
       'token': token,
       'isOn': '0',
