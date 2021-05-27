@@ -12,7 +12,11 @@ class _HomeState extends State<Home> {
   //Untuk menu kategori
   List<String> categories = ["Movie", "TV Show"];
   List<String> category = ["movie", "tv"];
+  List<String> category_filter = ["movie#", "tvshow#"];
   int selectedIndex = 0;
+
+  String type;
+  Movie fbMovie;
 
   //untuk menyesuaikan layar dengan gridview
   // double gridViewResolution = 0.67665;
@@ -24,6 +28,57 @@ class _HomeState extends State<Home> {
       ApiServices.getMediaList(category[selectedIndex]).then((medias) => {
             listMedia = medias,
           });
+
+      // for (int i = 0; i < listMedia.length; i++) {
+      //   // print(listMedia[i].id);
+      //   if (category[selectedIndex] == "movie") {
+      //     String uid = FirebaseAuth.instance.currentUser.uid;
+      //     CollectionReference productCollection = FirebaseFirestore.instance
+      //         .collection("watchlists")
+      //         .doc(uid)
+      //         .collection("movie#" + listMedia[i].id);
+
+      //     productCollection.get().then((value) {
+      //       value.docs.forEach((element) {
+      //         if (listMedia[i].id == element["mediaId"]) {
+      //           print("ketemu film : " + listMedia[i].judul);
+      //           listMedia[i].timestamp = element["timestamp"];
+      //           print("timestamp : " + listMedia[i].timestamp);
+      //         }
+      //       });
+      //       // if(value.docs.length == 0){
+      //       //   listMedia[i].timestamp = "No Timestamp";
+      //       //   // print("masuk sini");
+      //       //   // print(listMedia[i].judul);
+      //       // }
+      //     });
+      //   } else {
+      //     String uid = FirebaseAuth.instance.currentUser.uid;
+      //     CollectionReference productCollection = FirebaseFirestore.instance
+      //         .collection("watchlists")
+      //         .doc(uid)
+      //         .collection("tvshow#" + listMedia[i].id);
+
+      //     productCollection.get().then((value) {
+      //       value.docs.forEach((element) {
+      //         if (listMedia[i].id == element["mediaId"]) {
+      //           print("ketemu film : " + listMedia[i].judul);
+      //           listMedia[i].timestamp = element["timestamp"];
+      //           print("timestamp : " + listMedia[i].timestamp);
+      //         }
+      //       });
+      //       // if(value.docs.length == 0){
+      //       //   listMedia[i].timestamp = "No Timestamp";
+      //       //   // print("masuk sini");
+      //       //   // print(listMedia[i].judul);
+      //       // }
+      //     });
+      //   }
+
+      //   // if(listMedia[i].timestamp == null){
+      //   //     listMedia[i].timestamp = "TAKDE";
+      //   // }
+      // }
     });
     return Scaffold(
       body: Container(
@@ -111,14 +166,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             FutureBuilder(
-              future: ApiServices.getMediaList(category[selectedIndex])
-              // .then((movies) {
-              //   // print("HEY IT'S WORKING");
-              //   listMovie = movies;
-              //   setState(() {});
-              // }
-              // )
-              ,
+              future: ApiServices.getMediaList(category[selectedIndex]),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.data == null) {
                   return Container(
@@ -136,6 +184,7 @@ class _HomeState extends State<Home> {
                       ),
                       itemBuilder: (context, index) => MediaCard(
                         media: listMedia[index],
+                        type: category_filter[selectedIndex],
                         press: () => Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -161,6 +210,7 @@ class _HomeState extends State<Home> {
       onTap: () {
         setState(() {
           selectedIndex = index;
+          (context as Element).markNeedsBuild();
         });
       },
       child: Column(

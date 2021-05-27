@@ -3,11 +3,34 @@ part of 'widgets.dart';
 class MediaCard extends StatelessWidget {
   final Media media;
   final Function press;
+  final String type;
 
-  const MediaCard({Key key, this.media, this.press}) : super(key: key);
+  const MediaCard({Key key, this.media, this.press, this.type}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String uid = FirebaseAuth.instance.currentUser.uid;
+    CollectionReference productCollection = FirebaseFirestore.instance
+        .collection("watchlists")
+        .doc(uid)
+        .collection(type+ media.id);
+
+    productCollection.get().then((value) {
+      value.docs.forEach((element) {
+        if (media.id == element["mediaId"]) {
+          // print("ketemu film : " + media.judul);
+          media.timestamp = element["timestamp"];
+          // print("timestamp : " + media.timestamp)
+        }
+      });
+      // if(value.docs.length == 0){
+      //   listMedia[i].timestamp = "No Timestamp";
+      //   // print("masuk sini");
+      //   // print(listMedia[i].judul);
+      // }
+    });
+    (context as Element).markNeedsBuild();
+
     return GestureDetector(
       onTap: press,
       child: Container(
@@ -48,6 +71,8 @@ class MediaCard extends StatelessWidget {
                     media.judul,
                     textAlign: TextAlign.left,
                     maxLines: 1,
+                    overflow: TextOverflow.fade,
+                    softWrap: false,
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
@@ -55,7 +80,9 @@ class MediaCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    media.id,
+                    (media.timestamp != null)
+                        ? media.timestamp
+                        : "No timestamp",
                     textAlign: TextAlign.start,
                     maxLines: 1,
                     style: TextStyle(
