@@ -18,18 +18,14 @@ class MediaCard extends StatelessWidget {
     productCollection.get().then((value) {
       value.docs.forEach((element) {
         if (media.id == element["mediaId"]) {
-          // print("ketemu film : " + media.judul);
           media.timestamp = element["timestamp"];
-          // print("timestamp : " + media.timestamp)
         }
-      });
-      // if(value.docs.length == 0){
-      //   listMedia[i].timestamp = "No Timestamp";
-      //   // print("masuk sini");
-      //   // print(listMedia[i].judul);
-      // }
-    });
+
     (context as Element).markNeedsBuild();
+      });
+    });
+
+    // (context as Element).markNeedsBuild();
 
     return GestureDetector(
       onTap: press,
@@ -37,10 +33,6 @@ class MediaCard extends StatelessWidget {
         decoration: BoxDecoration(color: filmophileSoftBlue),
         child: Stack(
           children: [
-            // Image.network(
-            //   Constant.IMAGE_BASE_URL + movie.poster,
-            //   fit: BoxFit.fill,
-            // ),
             Container(
               width: double.infinity,
               height: double.infinity,

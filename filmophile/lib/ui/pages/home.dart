@@ -1,6 +1,7 @@
 part of 'pages.dart';
 
 class Home extends StatefulWidget {
+  
   @override
   _HomeState createState() => _HomeState();
 }
@@ -19,7 +20,6 @@ class _HomeState extends State<Home> {
   Movie fbMovie;
 
   //untuk menyesuaikan layar dengan gridview
-  // double gridViewResolution = 0.67665;
   double gridViewResolution = 0.6666666667;
 
   @override
@@ -28,58 +28,8 @@ class _HomeState extends State<Home> {
       ApiServices.getMediaList(category[selectedIndex]).then((medias) => {
             listMedia = medias,
           });
-
-      // for (int i = 0; i < listMedia.length; i++) {
-      //   // print(listMedia[i].id);
-      //   if (category[selectedIndex] == "movie") {
-      //     String uid = FirebaseAuth.instance.currentUser.uid;
-      //     CollectionReference productCollection = FirebaseFirestore.instance
-      //         .collection("watchlists")
-      //         .doc(uid)
-      //         .collection("movie#" + listMedia[i].id);
-
-      //     productCollection.get().then((value) {
-      //       value.docs.forEach((element) {
-      //         if (listMedia[i].id == element["mediaId"]) {
-      //           print("ketemu film : " + listMedia[i].judul);
-      //           listMedia[i].timestamp = element["timestamp"];
-      //           print("timestamp : " + listMedia[i].timestamp);
-      //         }
-      //       });
-      //       // if(value.docs.length == 0){
-      //       //   listMedia[i].timestamp = "No Timestamp";
-      //       //   // print("masuk sini");
-      //       //   // print(listMedia[i].judul);
-      //       // }
-      //     });
-      //   } else {
-      //     String uid = FirebaseAuth.instance.currentUser.uid;
-      //     CollectionReference productCollection = FirebaseFirestore.instance
-      //         .collection("watchlists")
-      //         .doc(uid)
-      //         .collection("tvshow#" + listMedia[i].id);
-
-      //     productCollection.get().then((value) {
-      //       value.docs.forEach((element) {
-      //         if (listMedia[i].id == element["mediaId"]) {
-      //           print("ketemu film : " + listMedia[i].judul);
-      //           listMedia[i].timestamp = element["timestamp"];
-      //           print("timestamp : " + listMedia[i].timestamp);
-      //         }
-      //       });
-      //       // if(value.docs.length == 0){
-      //       //   listMedia[i].timestamp = "No Timestamp";
-      //       //   // print("masuk sini");
-      //       //   // print(listMedia[i].judul);
-      //       // }
-      //     });
-      //   }
-
-      //   // if(listMedia[i].timestamp == null){
-      //   //     listMedia[i].timestamp = "TAKDE";
-      //   // }
-      // }
     });
+
     return Scaffold(
       body: Container(
         color: Colors.white,

@@ -10,10 +10,10 @@ class DetailMovie extends StatefulWidget {
 }
 
 class _DetailMovieState extends State<DetailMovie> {
-  Movie movie;
-  Movie fbMovie = new Movie();
+  Movie movie = new Movie(judul: "", tanggal: "" );
+  Movie fbMovie = new Movie( timestamp: "", notes: "" );
   String judulCard = "";
-  List<String> genreList;
+  List<String> genreList = [];
   String genreCard = "";
   bool isFavorite = false;
   IconData iconFavorite = Icons.favorite_outline;

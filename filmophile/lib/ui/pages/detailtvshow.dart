@@ -9,10 +9,10 @@ class DetailTv extends StatefulWidget {
 }
 
 class _DetailTvState extends State<DetailTv> {
-  TvShow tvShow;
-  TvShow fbTvShow = new TvShow();
+  TvShow tvShow = new TvShow(judul: "", tanggal: "" );
+  TvShow fbTvShow = new TvShow( timestamp: "", notes: "", episode: "0", season: "0");
   String judulCard = "";
-  List<String> genreList;
+  List<String> genreList = [];
   String genreCard = "";
   String isFavorite = "false";
   IconData iconFavorite = Icons.favorite_outline;
