@@ -1,7 +1,6 @@
 part of 'pages.dart';
 
 class Home extends StatefulWidget {
-  
   @override
   _HomeState createState() => _HomeState();
 }
@@ -14,6 +13,7 @@ class _HomeState extends State<Home> {
   List<String> categories = ["Movie", "TV Show"];
   List<String> category = ["movie", "tv"];
   List<String> category_filter = ["movie#", "tvshow#"];
+  List<String> ranks = ["Bronze", "Silver", "Gold", "Platinum", "Filmophile"];
   int selectedIndex = 0;
 
   String type;
@@ -22,14 +22,33 @@ class _HomeState extends State<Home> {
   //untuk menyesuaikan layar dengan gridview
   double gridViewResolution = 0.6666666667;
 
+  Users currentUser;
+
+  int refresh = 0;
+
   @override
+
+  // String nameCurrent = FirebaseAuth.instance.currentUser.;
+
   Widget build(BuildContext context) {
+    // print(" MANTAP");
+    UserService.getCurrentUser().then((value) {
+      // print(value.name + " MANTAP");
+      currentUser = new Users("", value.profilePicture, value.name, "", "", "",
+          "", "", "", value.following, value.followers, value.rank);
+if(currentUser != null && refresh == 0){
+      (context as Element).markNeedsBuild();
+      refresh = 1;
+}
+    });
+    // UserService.getCurrentUser();
+    // print(currentUser.name + "MANTAP");
+
     setState(() {
       ApiServices.getMediaList(category[selectedIndex]).then((medias) => {
             listMedia = medias,
           });
     });
-
     return Scaffold(
       body: Container(
         color: Colors.white,
@@ -50,7 +69,12 @@ class _HomeState extends State<Home> {
                     children: [
                       // SizedBox(height: 36),
                       Text(
-                        "ReinerJasin",
+                        (currentUser.name != null)
+                            ? currentUser.name
+                            : "Loading...",
+                        maxLines: 1,
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
                         style: TextStyle(
                           color: filmophileBlue,
                           fontFamily: GoogleFonts.righteous().fontFamily,
@@ -61,7 +85,9 @@ class _HomeState extends State<Home> {
                       Row(
                         children: [
                           Text(
-                            "Filmophile",
+                            (ranks[int.parse(currentUser.rank) - 1] != null)
+                                ? ranks[int.parse(currentUser.rank) - 1]
+                                : "",
                             style: TextStyle(
                               color: filmophileBlue,
                               fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
@@ -70,26 +96,11 @@ class _HomeState extends State<Home> {
                             textAlign: TextAlign.right,
                           ),
                           SizedBox(width: 8),
-                          Icon(
-                            Icons.whatshot_outlined,
-                            color: filmophileOrange,
-                          ),
-                          Icon(
-                            Icons.whatshot_outlined,
-                            color: filmophileOrange,
-                          ),
-                          Icon(
-                            Icons.whatshot_outlined,
-                            color: filmophileOrange,
-                          ),
-                          Icon(
-                            Icons.whatshot_outlined,
-                            color: filmophileOrange,
-                          ),
-                          Icon(
-                            Icons.whatshot_outlined,
-                            color: filmophileOrange,
-                          ),
+                          for (int i = 0; i < int.parse(currentUser.rank); i++)
+                            Icon(
+                              Icons.whatshot_outlined,
+                              color: filmophileOrange,
+                            ),
                         ],
                       ),
                     ],
@@ -160,7 +171,7 @@ class _HomeState extends State<Home> {
       onTap: () {
         setState(() {
           selectedIndex = index;
-          (context as Element).markNeedsBuild();
+          // (context as Element).markNeedsBuild();
         });
       },
       child: Column(

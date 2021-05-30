@@ -31,6 +31,10 @@ class AuthServices {
       'password': users.password,
       'token': token,
       'isOn': '0',
+      'moviesWatched': '0',
+      'episodesWatched': '0',
+      'following': '0',
+      'followers': '0',
       'createdAt': dateNow,
       'updatedAt': dateNow
     }).then((value) {

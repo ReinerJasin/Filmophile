@@ -10,3 +10,4 @@ import 'package:google_fonts/google_fonts.dart';
 part 'productcard.dart';
 part 'colors.dart';
 part 'mediaCard.dart';
+part 'accountCard.dart';

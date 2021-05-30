@@ -216,7 +216,12 @@ class _RegisterState extends State<Register> {
                                     ctrlEmail.text,
                                     ctrlPassword.text,
                                     "",
-                                    "");
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "1");
                                 await AuthServices.signUp(users).then((value) {
                                   if (value == "success") {
                                     setState(() {

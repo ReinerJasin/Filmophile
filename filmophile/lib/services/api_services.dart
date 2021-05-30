@@ -9,13 +9,7 @@ class ApiServices {
 
     // looping berdasarkan jumlah page yang kita
     for (int i = 1; i <= 2; i++) {
-      String apiURL = Constant.BASE_URL +
-          "/discover/" +
-          type +
-          "?api_key=" +
-          Constant.API_KEY +
-          "&page=" +
-          i.toString();
+      String apiURL = Constant.BASE_URL + "/discover/" + type + "?api_key=" + Constant.API_KEY + "&page=" + i.toString();
 
       var apiResult = await http.get(Uri.parse(apiURL));
       var jsonObject = json.decode(apiResult.body);

@@ -10,14 +10,16 @@ class DetailMovie extends StatefulWidget {
 }
 
 class _DetailMovieState extends State<DetailMovie> {
-  Movie movie = new Movie(judul: "", tanggal: "" );
-  Movie fbMovie = new Movie( timestamp: "", notes: "" );
+  Movie movie = new Movie(judul: "", tanggal: "");
+  Movie fbMovie = new Movie(timestamp: "", notes: "");
   String judulCard = "";
   List<String> genreList = [];
   String genreCard = "";
   bool isFavorite = false;
   IconData iconFavorite = Icons.favorite_outline;
   String type = "movie#";
+
+  bool isLoading = true;
 
   // Untuk menu
   List<String> categories = ["Progress", "Information", "Friends"];
@@ -52,7 +54,7 @@ class _DetailMovieState extends State<DetailMovie> {
             genreCard = value;
             // print("DEBUG 2");
             // print(genreList);
-            // }
+            // } 
           })
         });
 
@@ -71,8 +73,9 @@ class _DetailMovieState extends State<DetailMovie> {
         fbMovie.timestamp = "00:00:00";
         fbMovie.notes = "No notes added!";
       }
+      isLoading = false;
+      // print("isLoading mati");
     });
-
     return Scaffold(
       appBar: AppBar(
           title: Text(
@@ -108,104 +111,112 @@ class _DetailMovieState extends State<DetailMovie> {
               color: filmophileOrange,
             )
           ]),
-      body: Column(
+      body: Stack(
         children: [
-          (movie != null)
-              ? Stack(
-                  children: [
-                    // Kalau ada datanya
-                    Container(
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.width * 11 / 18,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(
-                              Constant.IMAGE_BASE_URL + movie.backdrop,
-                            ),
-                            fit: BoxFit.cover),
-                        color: filmophileSoftBlue,
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.width * 11 / 18,
-                      decoration: BoxDecoration(
-                        color: filmophileSoftBlue,
-                        gradient: LinearGradient(
-                          begin: FractionalOffset.topCenter,
-                          end: FractionalOffset.bottomCenter,
-                          colors: [
-                            Colors.transparent,
-                            Colors.black.withOpacity(0.7)
-                          ],
+          Column(
+            children: [
+              (movie != null)
+                  ? Stack(
+                      children: [
+                        // Kalau ada datanya
+                        Container(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.width * 11 / 18,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                  Constant.IMAGE_BASE_URL + movie.backdrop,
+                                ),
+                                fit: BoxFit.cover),
+                            color: filmophileSoftBlue,
+                          ),
                         ),
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.height -
-                          (MediaQuery.of(context).size.width * 11 / 18) -
-                          80 +
-                          20,
-                      margin: EdgeInsets.only(
-                          top: (MediaQuery.of(context).size.width * 11 / 18) -
-                              20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20)),
-                        color: Colors.white,
-                      ),
-                      child: Container(
-                        child: ListView(
-                          children: [
-                            Container(
-                              margin:
-                                  EdgeInsets.only(top: 12, left: 12, right: 12),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    judulCard,
-                                    style: TextStyle(
-                                      fontFamily:
-                                          GoogleFonts.righteous().fontFamily,
-                                      fontSize: 28,
-                                      color: filmophileBlue,
-                                    ),
-                                  ),
-                                  Text(
-                                    genreCard,
-                                    style: TextStyle(
-                                      fontFamily:
-                                          GoogleFonts.rhodiumLibre().fontFamily,
-                                      fontSize: 18,
-                                      color: filmophileBlue,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                        Container(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.width * 11 / 18,
+                          decoration: BoxDecoration(
+                            color: filmophileSoftBlue,
+                            gradient: LinearGradient(
+                              begin: FractionalOffset.topCenter,
+                              end: FractionalOffset.bottomCenter,
+                              colors: [
+                                Colors.transparent,
+                                Colors.black.withOpacity(0.7)
+                              ],
                             ),
-                            SizedBox(
-                              height: 50,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: categories.length,
-                                itemBuilder: (context, index) =>
-                                    buildCategory(index),
-                              ),
-                            ),
-                            Container(
-                              width: double.infinity,
-                              child: buildMenu(selectedIndex),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        Container(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height -
+                              (MediaQuery.of(context).size.width * 11 / 18) -
+                              80 +
+                              20,
+                          margin: EdgeInsets.only(
+                              top: (MediaQuery.of(context).size.width *
+                                      11 /
+                                      18) -
+                                  20),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20)),
+                            color: Colors.white,
+                          ),
+                          child: Container(
+                            child: ListView(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      top: 12, left: 12, right: 12),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        judulCard,
+                                        style: TextStyle(
+                                          fontFamily: GoogleFonts.righteous()
+                                              .fontFamily,
+                                          fontSize: 28,
+                                          color: filmophileBlue,
+                                        ),
+                                      ),
+                                      Text(
+                                        genreCard,
+                                        style: TextStyle(
+                                          fontFamily: GoogleFonts.rhodiumLibre()
+                                              .fontFamily,
+                                          fontSize: 18,
+                                          color: filmophileBlue,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: categories.length,
+                                    itemBuilder: (context, index) =>
+                                        buildCategory(index),
+                                  ),
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  child: buildMenu(selectedIndex),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
                     )
-                  ],
-                )
-              : Text("Loading...")
+                  : Text("Loading...")
+            ],
+          ),
+          isLoading == true ? ActivityServices.loadings() : Container()
         ],
       ),
     );

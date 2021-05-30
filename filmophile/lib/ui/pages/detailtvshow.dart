@@ -27,6 +27,8 @@ class _DetailTvState extends State<DetailTv> {
   ];
   int selectedIndex = 0;
 
+  bool isLoading = true;
+
   @override
   Widget build(BuildContext context) {
     ApiServices.getTvShowDetail(widget.tvId).then((value) => {
@@ -64,7 +66,7 @@ class _DetailTvState extends State<DetailTv> {
         fbTvShow.episode = element["current_episode"];
         fbTvShow.timestamp = element["timestamp"];
         fbTvShow.notes = element["notes"];
-        isFavorite = element["isFavorite"];
+        // isFavorite = element["isFavorite"];
       });
       if (value.docs.length == 0) {
         fbTvShow.season = "0";
@@ -72,6 +74,8 @@ class _DetailTvState extends State<DetailTv> {
         fbTvShow.timestamp = "00:00:00";
         fbTvShow.notes = "No notes added!";
       }
+      isLoading = false;
+      // print("isLoading mati");
     });
 
     return Scaffold(
@@ -121,104 +125,109 @@ class _DetailTvState extends State<DetailTv> {
               color: filmophileOrange,
             )
           ]),
-      body: Column(
+      body: Stack(
         children: [
-          (tvShow != null)
-              ? Stack(
-                  children: [
-                    // Kalau ada datanya
-                    Container(
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.width * 11 / 18,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(
-                              Constant.IMAGE_BASE_URL + tvShow.backdrop,
-                            ),
-                            fit: BoxFit.cover),
-                        color: filmophileSoftBlue,
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.width * 11 / 18,
-                      decoration: BoxDecoration(
-                        color: filmophileSoftBlue,
-                        gradient: LinearGradient(
-                          begin: FractionalOffset.topCenter,
-                          end: FractionalOffset.bottomCenter,
-                          colors: [
-                            Colors.transparent,
-                            Colors.black.withOpacity(0.7)
-                          ],
+          Column(
+            children: [
+              (tvShow != null)
+                  ? Stack(
+                      children: [
+                        // Kalau ada datanya
+                        Container(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.width * 11 / 18,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                  Constant.IMAGE_BASE_URL + tvShow.backdrop,
+                                ),
+                                fit: BoxFit.cover),
+                            color: filmophileSoftBlue,
+                          ),
                         ),
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.height -
-                          (MediaQuery.of(context).size.width * 11 / 18) -
-                          80 +
-                          20,
-                      margin: EdgeInsets.only(
-                          top: (MediaQuery.of(context).size.width * 11 / 18) -
-                              20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20)),
-                        color: Colors.white,
-                      ),
-                      child: Container(
-                        child: ListView(
-                          children: [
-                            Container(
-                              margin:
-                                  EdgeInsets.only(top: 12, left: 12, right: 12),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    judulCard,
-                                    style: TextStyle(
-                                      fontFamily:
-                                          GoogleFonts.righteous().fontFamily,
-                                      fontSize: 28,
-                                      color: filmophileBlue,
-                                    ),
-                                  ),
-                                  Text(
-                                    genreCard,
-                                    style: TextStyle(
-                                      fontFamily:
-                                          GoogleFonts.rhodiumLibre().fontFamily,
-                                      fontSize: 18,
-                                      color: filmophileBlue,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                        Container(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.width * 11 / 18,
+                          decoration: BoxDecoration(
+                            color: filmophileSoftBlue,
+                            gradient: LinearGradient(
+                              begin: FractionalOffset.topCenter,
+                              end: FractionalOffset.bottomCenter,
+                              colors: [
+                                Colors.transparent,
+                                Colors.black.withOpacity(0.7)
+                              ],
                             ),
-                            SizedBox(
-                              height: 50,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: categories.length,
-                                itemBuilder: (context, index) =>
-                                    buildCategory(index),
-                              ),
-                            ),
-                            Container(
-                              width: double.infinity,
-                              child: buildMenu(selectedIndex),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        Container(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height -
+                              (MediaQuery.of(context).size.width * 11 / 18) -
+                              80 +
+                              20,
+                          margin: EdgeInsets.only(
+                              top: (MediaQuery.of(context).size.width * 11 / 18) -
+                                  20),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20)),
+                            color: Colors.white,
+                          ),
+                          child: Container(
+                            child: ListView(
+                              children: [
+                                Container(
+                                  margin:
+                                      EdgeInsets.only(top: 12, left: 12, right: 12),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        judulCard,
+                                        style: TextStyle(
+                                          fontFamily:
+                                              GoogleFonts.righteous().fontFamily,
+                                          fontSize: 28,
+                                          color: filmophileBlue,
+                                        ),
+                                      ),
+                                      Text(
+                                        genreCard,
+                                        style: TextStyle(
+                                          fontFamily:
+                                              GoogleFonts.rhodiumLibre().fontFamily,
+                                          fontSize: 18,
+                                          color: filmophileBlue,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: categories.length,
+                                    itemBuilder: (context, index) =>
+                                        buildCategory(index),
+                                  ),
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  child: buildMenu(selectedIndex),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
                     )
-                  ],
-                )
-              : Text("nd ada data")
+                  : Text("nd ada data")
+            ],
+          ),
+          isLoading == true ? ActivityServices.loadings() : Container()
         ],
       ),
     );

@@ -9,6 +9,12 @@ class Users extends Equatable{
   final String createdAt;
   final String updatedAt;
 
+  final String movie;
+  final String episode;
+  final String following;
+  final String followers;
+  final String rank;
+
   Users(
     this.uid,
     this.profilePicture,
@@ -17,6 +23,11 @@ class Users extends Equatable{
     this.password,
     this.createdAt,
     this.updatedAt,
+    this.movie,
+    this.episode,
+    this.following,
+    this.followers,
+    this.rank,
   );
 
   @override

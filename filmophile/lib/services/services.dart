@@ -23,3 +23,4 @@ part 'activity_services.dart';
 part 'product_services.dart';
 part 'api_services.dart';
 part 'media_services.dart';
+part 'user_services.dart';

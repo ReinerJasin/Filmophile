@@ -25,3 +25,4 @@ part 'detailMovie.dart';
 part 'detailtvshow.dart';
 part 'nontonTv.dart';
 part 'nontonMovie.dart';
+part 'leaderboard.dart';

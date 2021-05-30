@@ -13,7 +13,7 @@ class _MainMenuState extends State<MainMenu> {
   static List<Widget> _widgetOptions = <Widget>[
     //nanti diganti
     Home(),
-    AddData(),
+    Leaderboard(),
     ListData(),
     MyAccount(),
   ];
@@ -52,7 +52,7 @@ class _MainMenuState extends State<MainMenu> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart),
-            label: 'Chart',
+            label: 'Leaderboard',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.explore_outlined),
