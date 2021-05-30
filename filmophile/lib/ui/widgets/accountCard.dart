@@ -1,21 +1,35 @@
 part of 'widgets.dart';
 
 class AccountCard extends StatelessWidget {
-  final Media media;
-  final Function press;
-  final String type;
+  final String name;
+  final String rank;
+  final String movie;
+  final String episode;
+  final String following;
+  final String followers;
+  final String index;
 
-  const AccountCard({Key key, this.media, this.press, this.type})
+  const AccountCard(
+      {Key key,
+      this.name,
+      this.rank,
+      this.movie,
+      this.episode,
+      this.following,
+      this.followers,
+      this.index})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // print("HELLOOOO");
     List<IconData> addFriend = [
       Icons.person_add_outlined,
       Icons.how_to_reg_outlined
     ];
     List<Color> addFriendColor = [Colors.white, Color(0xFFB9D660)];
 
+  List<String> listRank = ["BRONZE", "SILVER", "GOLD", "PLATINUM", "FILMOPHILE"];
     // String uid = FirebaseAuth.instance.currentUser.uid;
     // CollectionReference productCollection = FirebaseFirestore.instance
     //     .collection("watchlists")
@@ -35,7 +49,7 @@ class AccountCard extends StatelessWidget {
     // (context as Element).markNeedsBuild();
 
     return GestureDetector(
-      onTap: press,
+      onTap: null,
       child: Card(
         color: filmophileBlue,
         shape: RoundedRectangleBorder(
@@ -53,7 +67,10 @@ class AccountCard extends StatelessWidget {
                       "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2lsaG91ZXR0ZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"),
                 ),
                 title: Text(
-                  'Reiner Jasin',
+                  name,
+                  maxLines: 1,
+                  overflow: TextOverflow.fade,
+                  softWrap: false,
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: GoogleFonts.righteous().fontFamily,
@@ -61,7 +78,7 @@ class AccountCard extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  'Rank #1',
+                  'Rank #' + index,
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
@@ -104,14 +121,14 @@ class AccountCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "PLATINUM",
+                        listRank[int.parse(rank) - 1] + " ",
                         style: TextStyle(
                           color: filmophileBlue,
                           fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
                           fontSize: 16,
                         ),
                       ),
-                      for (int i = 0; i < 5; i++)
+                      for (int i = 0; i < int.parse(rank); i++)
                         Icon(Icons.whatshot_outlined, color: filmophileOrange)
                     ],
                   ),
@@ -133,7 +150,7 @@ class AccountCard extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "4533 ",
+                                movie,
                                 style: TextStyle(
                                   color: filmophileBlue,
                                   fontFamily:
@@ -142,7 +159,7 @@ class AccountCard extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "Movies watched",
+                                " Movies watched",
                                 style: TextStyle(
                                   color: filmophileBlue,
                                   fontFamily:
@@ -155,7 +172,7 @@ class AccountCard extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "384 ",
+                                episode,
                                 style: TextStyle(
                                   color: filmophileBlue,
                                   fontFamily:
@@ -164,7 +181,7 @@ class AccountCard extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "Episodes watched",
+                                " Episodes watched",
                                 style: TextStyle(
                                   color: filmophileBlue,
                                   fontFamily:
@@ -182,7 +199,7 @@ class AccountCard extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "500 ",
+                                following,
                                 style: TextStyle(
                                   color: filmophileBlue,
                                   fontFamily:
@@ -191,7 +208,7 @@ class AccountCard extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "Following",
+                                " Following",
                                 style: TextStyle(
                                   color: filmophileBlue,
                                   fontFamily:
@@ -204,7 +221,7 @@ class AccountCard extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "327 ",
+                                followers,
                                 style: TextStyle(
                                   color: filmophileBlue,
                                   fontFamily:
@@ -213,7 +230,7 @@ class AccountCard extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "Followers",
+                                " Followers",
                                 style: TextStyle(
                                   color: filmophileBlue,
                                   fontFamily:
