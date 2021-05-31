@@ -15,7 +15,7 @@ class _MyAccountState extends State<MyAccount> {
   List<String> categories = ["My Movie", "My TV Show"];
   List<String> category = ["movie", "tv"];
   List<String> category_filter = ["movie#", "tvshow#"];
-  List<String> ranks = ["Bronze", "Silver", "Gold", "Platinum", "Filmophile"];
+  List<String> ranks = ["BRONZE", "SILVER", "GOLD", "PLATINUM", "FILMOPHILE"];
   int selectedIndex = 0;
 
   String type;

@@ -78,7 +78,7 @@ class AccountCard extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  'Rank #' + index,
+                  'Rank #' + (int.parse(index) + 1).toString() ,
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
@@ -120,7 +120,7 @@ class AccountCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
+                      Text( 
                         listRank[int.parse(rank) - 1] + " ",
                         style: TextStyle(
                           color: filmophileBlue,

@@ -15,7 +15,7 @@ class UserService {
     List<Users> listUser = [];
 
     // await userCollection.where('uid', isEqualTo: uid).get().then((value) => {
-    await userCollection.get().then((value) => {
+    await userCollection.orderBy("followers", descending: true).get().then((value) => {
           value.docs.forEach((element) {
             //kayak gini
             // print(element["name"]);
