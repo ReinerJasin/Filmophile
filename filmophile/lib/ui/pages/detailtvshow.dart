@@ -28,6 +28,7 @@ class _DetailTvState extends State<DetailTv> {
   int selectedIndex = 0;
 
   bool isLoading = true;
+String newTV = "false";
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +63,7 @@ class _DetailTvState extends State<DetailTv> {
 
     productCollection.get().then((value) {
       value.docs.forEach((element) {
+        fbTvShow.status = element["status"];
         fbTvShow.season = element["current_season"];
         fbTvShow.episode = element["current_episode"];
         fbTvShow.timestamp = element["timestamp"];
@@ -69,6 +71,7 @@ class _DetailTvState extends State<DetailTv> {
         // isFavorite = element["isFavorite"];
       });
       if (value.docs.length == 0) {
+        fbTvShow.status = "Not Watched";
         fbTvShow.season = "0";
         fbTvShow.episode = "0";
         fbTvShow.timestamp = "00:00:00";
@@ -99,6 +102,11 @@ class _DetailTvState extends State<DetailTv> {
                               tvJudul: tvShow.judul,
                               maxSeason: tvShow.season,
                               maxEpisode: tvShow.episode,
+                              status: fbTvShow.status,
+                              season: fbTvShow.season,
+                              episode: fbTvShow.episode,
+                              timestamp: fbTvShow.timestamp,
+                              notes: fbTvShow.notes,
                             ))),
               },
               color: filmophileBlue,

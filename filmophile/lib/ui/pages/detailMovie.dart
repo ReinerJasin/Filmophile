@@ -21,7 +21,7 @@ class _DetailMovieState extends State<DetailMovie> {
   String type = "movie#";
 
   bool isLoading = true;
-
+String newMovie = "false";
   // Untuk menu
   List<String> categories = ["Progress", "Information", "Friends"];
   List<IconData> categories_icon = [
@@ -55,7 +55,7 @@ class _DetailMovieState extends State<DetailMovie> {
             genreCard = value;
             // print("DEBUG 2");
             // print(genreList);
-            // } 
+            // }
           })
         });
 
@@ -67,12 +67,15 @@ class _DetailMovieState extends State<DetailMovie> {
 
     productCollection.get().then((value) {
       value.docs.forEach((element) {
+        fbMovie.status = element["status"];
         fbMovie.timestamp = element["timestamp"];
         fbMovie.notes = element["notes"];
       });
       if (value.docs.length == 0) {
+        fbMovie.status = "Not Watched";
         fbMovie.timestamp = "00:00:00";
         fbMovie.notes = "No notes added!";
+        newMovie = "true";
       }
       isLoading = false;
       // print("isLoading mati");
@@ -94,7 +97,13 @@ class _DetailMovieState extends State<DetailMovie> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => NontonMovie(
-                            movieId: movie.id, movieJudul: movie.judul))),
+                              movieId: movie.id,
+                              movieJudul: movie.judul,
+                              status: fbMovie.status,
+                              timestamp: fbMovie.timestamp,
+                              notes: fbMovie.notes,
+                              newMovie: newMovie,
+                            ))),
               },
               color: filmophileBlue,
             ),

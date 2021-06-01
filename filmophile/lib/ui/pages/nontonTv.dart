@@ -6,8 +6,11 @@ class NontonTv extends StatefulWidget {
   final String status;
   final String maxSeason;
   final String maxEpisode;
+  final String season;
+  final String episode;
   final String timestamp;
   final String notes;
+  final String newTV;
 
   const NontonTv(
       {Key key,
@@ -16,8 +19,11 @@ class NontonTv extends StatefulWidget {
       this.status,
       this.maxSeason,
       this.maxEpisode,
+      this.season,
+      this.episode,
       this.timestamp,
-      this.notes})
+      this.notes,
+      this.newTV})
       : super(key: key);
   @override
   _NontonTvState createState() => _NontonTvState();
@@ -25,16 +31,26 @@ class NontonTv extends StatefulWidget {
 
 class _NontonTvState extends State<NontonTv> {
   final _formKey = GlobalKey<FormState>();
-  final ctrlStatus = TextEditingController();
-  final ctrlSeason = TextEditingController();
-  final ctrlEpisode = TextEditingController();
-  final ctrlTimestamp = TextEditingController();
-  final ctrlNotes = TextEditingController();
+  var ctrlStatus = TextEditingController();
+  var ctrlSeason = TextEditingController();
+  var ctrlEpisode = TextEditingController();
+  var ctrlTimestamp = TextEditingController();
+  var ctrlNotes = TextEditingController();
   bool isVisible = true;
   bool isLoading = false;
   String type = "tvshow";
 
   static FirebaseAuth auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    ctrlStatus.text = widget.status;
+    ctrlSeason.text = widget.season;
+    ctrlEpisode.text = widget.episode;
+    ctrlTimestamp.text = widget.timestamp;
+    ctrlNotes.text = widget.notes;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +104,8 @@ class _NontonTvState extends State<NontonTv> {
                             controller: ctrlSeason,
                             keyboardType: TextInputType.name,
                             decoration: InputDecoration(
-                              labelText: "Season (max : " + widget.maxSeason + ")",
+                              labelText:
+                                  "Season (max : " + widget.maxSeason + ")",
                               labelStyle: TextStyle(color: filmophileBlue),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: filmophileBlue),
@@ -119,7 +136,8 @@ class _NontonTvState extends State<NontonTv> {
                             controller: ctrlEpisode,
                             keyboardType: TextInputType.name,
                             decoration: InputDecoration(
-                              labelText: "Episode (max : " + widget.maxEpisode + ")",
+                              labelText:
+                                  "Episode (max : " + widget.maxEpisode + ")",
                               labelStyle: TextStyle(color: filmophileBlue),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: filmophileBlue),
@@ -141,7 +159,7 @@ class _NontonTvState extends State<NontonTv> {
                               } else if (int.parse(value) >
                                   int.parse(widget.maxEpisode)) {
                                 return "Episode " + value + " doesn't exist!";
-                              }  else {
+                              } else {
                                 return null;
                               }
                             },
@@ -211,29 +229,85 @@ class _NontonTvState extends State<NontonTv> {
                                 setState(() {
                                   isLoading = true;
                                 });
-                                await MediaServices.addWatchlist(
-                                        auth.currentUser.uid,
-                                        widget.tvId,
-                                        type,
-                                        ctrlStatus.text,
-                                        ctrlSeason.text,
-                                        ctrlEpisode.text,
-                                        ctrlTimestamp.text,
-                                        ctrlNotes.text)
-                                    .then((value) {
-                                  if (value == true) {
-                                    ActivityServices.showToast(
-                                        "Changes saved!", Colors.green);
-                                    // clearForm();
-                                    setState(() {
-                                      isLoading = false;
-                                    });
-                                  } else {
-                                    ActivityServices.showToast(
-                                        "Something's wrong, please try again!",
-                                        Colors.red);
-                                  }
-                                });
+
+                                if (widget.newTV == "true") {
+                                  await MediaServices.addWatchlist(
+                                          auth.currentUser.uid,
+                                          widget.tvId,
+                                          type,
+                                          ctrlStatus.text,
+                                          ctrlSeason.text,
+                                          ctrlEpisode.text,
+                                          ctrlTimestamp.text,
+                                          ctrlNotes.text)
+                                      .then((value) {
+                                    if (value == true) {
+                                      ActivityServices.showToast(
+                                          "Changes saved!", Colors.green);
+                                      // clearForm();
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DetailMovie(movieId: widget.movieId,)));
+                                      Navigator.pop(context);
+                                    } else {
+                                      ActivityServices.showToast(
+                                          "Something's wrong, please try again!",
+                                          Colors.red);
+                                    }
+                                  });
+                                } else {
+                                  await MediaServices.editWatchlist(
+                                          auth.currentUser.uid,
+                                          widget.tvId,
+                                          type,
+                                          ctrlStatus.text,
+                                          ctrlSeason.text,
+                                          ctrlEpisode.text,
+                                          ctrlTimestamp.text,
+                                          ctrlNotes.text)
+                                      .then((value) {
+                                    if (value == true) {
+                                      ActivityServices.showToast(
+                                          "Changes saved!", Colors.green);
+                                      // clearForm();
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DetailMovie(movieId: widget.movieId,)));
+                                      Navigator.pop(context);
+                                    } else {
+                                      ActivityServices.showToast(
+                                          "Something's wrong, please try again!",
+                                          Colors.red);
+                                    }
+                                  });
+                                }
+
+                                // await MediaServices.addWatchlist(
+                                //         auth.currentUser.uid,
+                                //         widget.tvId,
+                                //         type,
+                                //         ctrlStatus.text,
+                                //         ctrlSeason.text,
+                                //         ctrlEpisode.text,
+                                //         ctrlTimestamp.text,
+                                //         ctrlNotes.text)
+                                //     .then((value) {
+                                //   if (value == true) {
+                                //     ActivityServices.showToast(
+                                //         "Changes saved!", Colors.green);
+                                //     // clearForm();
+                                //     setState(() {
+                                //       isLoading = false;
+                                //     });
+                                //     Navigator.pop(context);
+                                //   } else {
+                                //     ActivityServices.showToast(
+                                //         "Something's wrong, please try again!",
+                                //         Colors.red);
+                                //   }
+                                // });
                               }
                             },
                             child: Container(

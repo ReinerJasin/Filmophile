@@ -6,6 +6,7 @@ class NontonMovie extends StatefulWidget {
   final String status;
   final String timestamp;
   final String notes;
+  final String newMovie;
 
   const NontonMovie(
       {Key key,
@@ -13,7 +14,8 @@ class NontonMovie extends StatefulWidget {
       this.movieJudul,
       this.status,
       this.timestamp,
-      this.notes})
+      this.notes,
+      this.newMovie})
       : super(key: key);
   @override
   _NontonMovieState createState() => _NontonMovieState();
@@ -29,6 +31,14 @@ class _NontonMovieState extends State<NontonMovie> {
   String type = "movie";
 
   static FirebaseAuth auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    ctrlStatus.text = widget.status;
+    ctrlTimestamp.text = widget.timestamp;
+    ctrlNotes.text = widget.notes;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,31 +153,84 @@ class _NontonMovieState extends State<NontonMovie> {
                                 setState(() {
                                   isLoading = true;
                                 });
-                                await MediaServices.addWatchlist(
-                                        auth.currentUser.uid,
-                                        widget.movieId,
-                                        type,
-                                        ctrlStatus.text,
-                                        null,
-                                        null,
-                                        ctrlTimestamp.text,
-                                        ctrlNotes.text)
-                                    .then((value) {
-                                  if (value == true) {
-                                    ActivityServices.showToast(
-                                        "Changes saved!", Colors.green);
-                                    // clearForm();
-                                    setState(() {
-                                      isLoading = false;
-                                    });
-                            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DetailMovie(movieId: widget.movieId,)));
-                            Navigator.pop(context);
-                                  } else { 
-                                    ActivityServices.showToast(
-                                        "Something's wrong, please try again!",
-                                        Colors.red);
-                                  }
-                                });
+                                if (widget.newMovie == "true") {
+                                  await MediaServices.addWatchlist(
+                                          auth.currentUser.uid,
+                                          widget.movieId,
+                                          type,
+                                          ctrlStatus.text,
+                                          null,
+                                          null,
+                                          ctrlTimestamp.text,
+                                          ctrlNotes.text)
+                                      .then((value) {
+                                    if (value == true) {
+                                      ActivityServices.showToast(
+                                          "Changes saved!", Colors.green);
+                                      // clearForm();
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DetailMovie(movieId: widget.movieId,)));
+                                      Navigator.pop(context);
+                                    } else {
+                                      ActivityServices.showToast(
+                                          "Something's wrong, please try again!",
+                                          Colors.red);
+                                    }
+                                  });
+                                } else {
+                                  await MediaServices.editWatchlist(
+                                          auth.currentUser.uid,
+                                          widget.movieId,
+                                          type,
+                                          ctrlStatus.text,
+                                          null,
+                                          null,
+                                          ctrlTimestamp.text,
+                                          ctrlNotes.text)
+                                      .then((value) {
+                                    if (value == true) {
+                                      ActivityServices.showToast(
+                                          "Changes saved!", Colors.green);
+                                      // clearForm();
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DetailMovie(movieId: widget.movieId,)));
+                                      Navigator.pop(context);
+                                    } else {
+                                      ActivityServices.showToast(
+                                          "Something's wrong, please try again!",
+                                          Colors.red);
+                                    }
+                                  });
+                                }
+                                //     await MediaServices.addWatchlist(
+                                //             auth.currentUser.uid,
+                                //             widget.movieId,
+                                //             type,
+                                //             ctrlStatus.text,
+                                //             null,
+                                //             null,
+                                //             ctrlTimestamp.text,
+                                //             ctrlNotes.text)
+                                //         .then((value) {
+                                //       if (value == true) {
+                                //         ActivityServices.showToast(
+                                //             "Changes saved!", Colors.green);
+                                //         // clearForm();
+                                //         setState(() {
+                                //           isLoading = false;
+                                //         });
+                                // // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DetailMovie(movieId: widget.movieId,)));
+                                // Navigator.pop(context);
+                                //       } else {
+                                //         ActivityServices.showToast(
+                                //             "Something's wrong, please try again!",
+                                //             Colors.red);
+                                //       }
+                                //     });
                               }
                             },
                             child: Container(

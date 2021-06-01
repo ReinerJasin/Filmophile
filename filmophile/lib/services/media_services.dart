@@ -38,6 +38,74 @@ class MediaServices {
     return true;
   }
 
+  static Future<bool> editWatchlist(
+      String uid,
+      String mediaId,
+      String type,
+      String status,
+      String currentSeason,
+      String currentEpisode,
+      String timestamp,
+      String notes) async {
+    await Firebase.initializeApp();
+    String dateNow = ActivityServices.dateNow();
+    await productCollection
+        .doc(auth.currentUser.uid)
+        .collection(type + "#" + mediaId)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        // print(element.id);
+        productCollection
+            .doc(auth.currentUser.uid)
+            .collection(type + "#" + mediaId)
+            .doc(element.id)
+            .update({
+          'notes': notes,
+          'status': status,
+          'timestamp': timestamp,
+          'current_season': currentSeason,
+          'current_episode': currentEpisode,
+        });
+        // element.data().update('status', (value) => status);
+        // element.data().update('timestamp', (value) => timestamp);
+        // element.data().update('notes', (value) => notes);
+        //udah bisa update element tinggal update di firebase
+      });
+    });
+    print(status);
+    print(timestamp);
+    print(notes);
+    //   .doc().update({
+    // 'uid': uid,
+    // 'mediaId': mediaId,
+    // 'type': type,
+    // 'status': status,
+    // 'current_season': currentSeason,
+    // 'current_episode': currentEpisode,
+    // 'timestamp': timestamp,
+    // 'notes': notes,
+    // 'createdAt': dateNow,
+    // 'updatedAt': dateNow,
+    // 'isFavorite': null,
+    //   });
+
+    //     .add({
+    //   'uid': uid,
+    //   'mediaId': mediaId,
+    //   'type': type,
+    //   'status': status,
+    //   'current_season': currentSeason,
+    //   'current_episode': currentEpisode,
+    //   'timestamp': timestamp,
+    //   'notes': notes,
+    //   'createdAt': dateNow,
+    //   'updatedAt': dateNow,
+    //   'isFavorite': null,
+    // });
+    return true;
+  }
+
   static Future<bool> changeFavorite(
     String uid,
     String mediaId,
@@ -59,8 +127,8 @@ class MediaServices {
 
       if (value.docs.length == 0) {
         print(value.docs.length);
-          print("media tidak ditemukan dalam firebase");
-        }
+        print("media tidak ditemukan dalam firebase");
+      }
     });
 
     // productDocument = await productCollection
