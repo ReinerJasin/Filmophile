@@ -99,4 +99,29 @@ class ApiServices {
 // NOTES:
 //
 //   static Future<List<Cast>> getCasts(String id) async {}
+
+
+static Future<List<Media>> getMediaListExplore(String type, String genreId) async {
+    List<Media> medias = [];
+
+    // looping berdasarkan jumlah page yang kita
+    for (int i = 1; i <= 2; i++) {
+      String apiURL = Constant.BASE_URL + "/discover/" + type + "?api_key=" + Constant.API_KEY + "&page=" + i.toString() + "&with_genres=" + genreId;
+
+      var apiResult = await http.get(Uri.parse(apiURL));
+      var jsonObject = json.decode(apiResult.body);
+
+      List<dynamic> listMedias =
+          (jsonObject as Map<String, dynamic>)['results'];
+
+      for (int i = 0; i < listMedias.length; i++)
+        if (type == "movie") {
+          medias.add(Media.createMedias(listMedias[i], "title"));
+        } else {
+          medias.add(Media.createMedias(listMedias[i], "name"));
+        }
+    }
+    return medias;
+  }
+
 }

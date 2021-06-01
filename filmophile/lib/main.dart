@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
         Login.routeName : (context) => Login(),
         MainMenu.routeName : (context) => MainMenu(),
         Register.routeName : (context) => Register(),
+        // DetailMovie.routeName : (context) => DetailMovie(),
         // 'menu': (context) => Menu(),
         // History.routeName: (context) => History(),
       },

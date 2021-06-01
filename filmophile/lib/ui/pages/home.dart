@@ -36,10 +36,10 @@ class _HomeState extends State<Home> {
       // print(value.name + " MANTAP");
       currentUser = new Users("", value.profilePicture, value.name, "", "", "",
           "", "", "", value.following, value.followers, value.rank);
-if(currentUser != null && refresh == 0){
-      (context as Element).markNeedsBuild();
-      refresh = 1;
-}
+      if (currentUser != null && refresh == 0) {
+        (context as Element).markNeedsBuild();
+        refresh = 1;
+      }
     });
     // UserService.getCurrentUser();
     // print(currentUser.name + "MANTAP");
@@ -117,6 +117,29 @@ if(currentUser != null && refresh == 0){
                   alignment: Alignment.centerRight,
                 ),
               ],
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 16, right: 16),
+              margin: EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                  color: filmophileSoftBlue,
+                  borderRadius: BorderRadius.circular(30)),
+              child: TextField(
+                style: TextStyle(
+                      fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
+                      color: filmophileBlue),
+                decoration: InputDecoration(
+                  hintText: "Search...",
+                  hintStyle: TextStyle(
+                      fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
+                      color: filmophileBlue),
+                  icon: Icon(
+                    Icons.search,
+                    color: filmophileBlue,
+                  ),
+                  border: InputBorder.none,
+                ),
+              ),
             ),
             SizedBox(
               height: 50,

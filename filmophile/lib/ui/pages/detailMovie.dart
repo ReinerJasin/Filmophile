@@ -1,6 +1,7 @@
 part of 'pages.dart';
 
 class DetailMovie extends StatefulWidget {
+  // static const String routeName = "/detailMovie";
   final String movieId;
 
   const DetailMovie({Key key, this.movieId}) : super(key: key);

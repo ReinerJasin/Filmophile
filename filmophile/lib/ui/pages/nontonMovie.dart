@@ -160,7 +160,9 @@ class _NontonMovieState extends State<NontonMovie> {
                                     setState(() {
                                       isLoading = false;
                                     });
-                                  } else {
+                            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DetailMovie(movieId: widget.movieId,)));
+                            Navigator.pop(context);
+                                  } else { 
                                     ActivityServices.showToast(
                                         "Something's wrong, please try again!",
                                         Colors.red);

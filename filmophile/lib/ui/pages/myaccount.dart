@@ -43,7 +43,7 @@ class _MyAccountState extends State<MyAccount> {
       
     });
     // UserService.getCurrentUser();
-    print(currentUser.following + "MANTAP");
+    // print(currentUser.following + "MANTAP");
 
     setState(() {
       ApiServices.getMediaList(category[selectedIndex]).then((medias) => {

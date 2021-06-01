@@ -26,3 +26,4 @@ part 'detailtvshow.dart';
 part 'nontonTv.dart';
 part 'nontonMovie.dart';
 part 'leaderboard.dart';
+part 'explore.dart';

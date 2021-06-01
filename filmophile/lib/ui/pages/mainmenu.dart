@@ -14,7 +14,7 @@ class _MainMenuState extends State<MainMenu> {
     //nanti diganti
     Home(),
     Leaderboard(),
-    ListData(),
+    Explore(),
     MyAccount(),
   ];
 
