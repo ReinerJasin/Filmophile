@@ -36,7 +36,8 @@ class AuthServices {
       'following': '0',
       'followers': '0',
       'createdAt': dateNow,
-      'updatedAt': dateNow
+      'updatedAt': dateNow,
+      'rank': '1',
     }).then((value) {
       msg = "success";
     }).catchError((onError) {
