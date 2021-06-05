@@ -96,7 +96,20 @@ class AccountCard extends StatelessWidget {
                     IconButton(
                       icon: Icon(Icons.search),
                       color: Colors.white,
-                      onPressed: () => {null},
+                      onPressed: () => {
+                        
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => NontonMovie(
+                //               movieId: movie.id,
+                //               movieJudul: movie.judul,
+                //               status: fbMovie.status,
+                //               timestamp: fbMovie.timestamp,
+                //               notes: fbMovie.notes,
+                //               newMovie: newMovie,
+                //             ))),
+                      },
                     )
                   ],
                 ),

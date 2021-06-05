@@ -9,7 +9,7 @@ class _LeaderboardState extends State<Leaderboard> {
 
   List<Users> listUser = [];
   List<String> ranks = ["Bronze", "Silver", "Gold", "Platinum", "Filmophile"];
-  List<String> categories = ["Movie", "TV Show"];
+  List<String> categories = ["Global", "Following"];
 
   Users currentUser;
   int refresh = 0;
