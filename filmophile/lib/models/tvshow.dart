@@ -43,5 +43,4 @@ class TvShow {
       genreIds: object['genres'],
     );
   }
-
 }

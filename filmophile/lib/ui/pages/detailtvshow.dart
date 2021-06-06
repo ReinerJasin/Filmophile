@@ -9,8 +9,9 @@ class DetailTv extends StatefulWidget {
 }
 
 class _DetailTvState extends State<DetailTv> {
-  TvShow tvShow = new TvShow(judul: "", tanggal: "" );
-  TvShow fbTvShow = new TvShow( timestamp: "", notes: "", episode: "0", season: "0");
+  TvShow tvShow = new TvShow(judul: "", tanggal: "");
+  TvShow fbTvShow =
+      new TvShow(timestamp: "", notes: "", episode: "0", season: "0");
   String judulCard = "";
   List<String> genreList = [];
   String genreCard = "";
@@ -28,7 +29,7 @@ class _DetailTvState extends State<DetailTv> {
   int selectedIndex = 0;
 
   bool isLoading = true;
-String newTV = "false";
+  String newTV = "false";
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,6 @@ String newTV = "false";
         fbTvShow.episode = element["current_episode"];
         fbTvShow.timestamp = element["timestamp"];
         fbTvShow.notes = element["notes"];
-        // isFavorite = element["isFavorite"];
       });
       if (value.docs.length == 0) {
         fbTvShow.status = "Not Watched";
@@ -76,9 +76,9 @@ String newTV = "false";
         fbTvShow.episode = "0";
         fbTvShow.timestamp = "00:00:00";
         fbTvShow.notes = "No notes added!";
+        newTV = "true";
       }
       isLoading = false;
-      // print("isLoading mati");
     });
 
     return Scaffold(
@@ -107,6 +107,7 @@ String newTV = "false";
                               episode: fbTvShow.episode,
                               timestamp: fbTvShow.timestamp,
                               notes: fbTvShow.notes,
+                              newTV: newTV,
                             ))),
               },
               color: filmophileBlue,
@@ -119,13 +120,15 @@ String newTV = "false";
                   {
                     isFavorite = "true",
                     iconFavorite = Icons.favorite,
-                    MediaServices.changeFavorite(uid, tvShow.id, type, isFavorite),
+                    MediaServices.changeFavorite(
+                        uid, tvShow.id, type, isFavorite),
                   }
                 else
                   {
                     isFavorite = "false",
                     iconFavorite = Icons.favorite_outline,
-                    MediaServices.changeFavorite(uid, tvShow.id, type, isFavorite),
+                    MediaServices.changeFavorite(
+                        uid, tvShow.id, type, isFavorite),
                   },
                 setState(() {}),
                 print(isFavorite)
@@ -140,7 +143,6 @@ String newTV = "false";
               (tvShow != null)
                   ? Stack(
                       children: [
-                        // Kalau ada datanya
                         Container(
                           width: double.infinity,
                           height: MediaQuery.of(context).size.width * 11 / 18,
@@ -175,7 +177,9 @@ String newTV = "false";
                               80 +
                               20,
                           margin: EdgeInsets.only(
-                              top: (MediaQuery.of(context).size.width * 11 / 18) -
+                              top: (MediaQuery.of(context).size.width *
+                                      11 /
+                                      18) -
                                   20),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
@@ -187,16 +191,17 @@ String newTV = "false";
                             child: ListView(
                               children: [
                                 Container(
-                                  margin:
-                                      EdgeInsets.only(top: 12, left: 12, right: 12),
+                                  margin: EdgeInsets.only(
+                                      top: 12, left: 12, right: 12),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         judulCard,
                                         style: TextStyle(
-                                          fontFamily:
-                                              GoogleFonts.righteous().fontFamily,
+                                          fontFamily: GoogleFonts.righteous()
+                                              .fontFamily,
                                           fontSize: 28,
                                           color: filmophileBlue,
                                         ),
@@ -204,8 +209,8 @@ String newTV = "false";
                                       Text(
                                         genreCard,
                                         style: TextStyle(
-                                          fontFamily:
-                                              GoogleFonts.rhodiumLibre().fontFamily,
+                                          fontFamily: GoogleFonts.rhodiumLibre()
+                                              .fontFamily,
                                           fontSize: 18,
                                           color: filmophileBlue,
                                         ),
@@ -285,9 +290,6 @@ String newTV = "false";
                   ],
                 ),
                 Container(
-                  // width: 75,
-                  // margin: EdgeInsets.only(
-                  //     left: MediaQuery.of(context).size.width * 0.44),
                   child: Text(
                     (int.parse(fbTvShow.season) /
                                 int.parse(tvShow.season) *
@@ -300,7 +302,6 @@ String newTV = "false";
                       fontFamily: GoogleFonts.righteous().fontFamily,
                       fontSize: 18,
                     ),
-                    // textAlign: TextAlign.right,
                   ),
                 ),
               ],
@@ -357,9 +358,6 @@ String newTV = "false";
                   ],
                 ),
                 Container(
-                  // width: 75,
-                  // margin: EdgeInsets.only(
-                  //     left: MediaQuery.of(context).size.width * 0.44),
                   child: Text(
                     (int.parse(fbTvShow.episode) /
                                 int.parse(tvShow.episode) *
@@ -372,7 +370,6 @@ String newTV = "false";
                       fontFamily: GoogleFonts.righteous().fontFamily,
                       fontSize: 18,
                     ),
-                    // textAlign: TextAlign.right,
                   ),
                 ),
               ],
@@ -565,7 +562,6 @@ String newTV = "false";
                 )
               : Container(
                   color: Colors.transparent,
-                  // margin: EdgeInsets.only(top: 5),
                   width: MediaQuery.of(context).size.width * 0.333333,
                   child: Column(
                     children: [
@@ -586,13 +582,6 @@ String newTV = "false";
                     ],
                   ),
                 ),
-          // Container(
-          //   alignment: Alignment.center,
-          //   height: 4,
-          //   width: 50,
-          //   color:
-          //       selectedIndex == index ? filmophileOrange : Colors.transparent,
-          // ),
         ],
       ),
     );

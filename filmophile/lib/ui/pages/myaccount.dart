@@ -30,9 +30,7 @@ class _MyAccountState extends State<MyAccount> {
 
   @override
   Widget build(BuildContext context) {
-    print(" MANTAP");
     UserService.getCurrentUser().then((value) {
-      // print(value.name + " MANTAP");
       currentUser = new Users("", value.profilePicture, value.name, "", "", "",
           "", "", "", value.following, value.followers, value.rank);
 
@@ -40,10 +38,7 @@ class _MyAccountState extends State<MyAccount> {
         (context as Element).markNeedsBuild();
         refresh = 1;
       }
-      
     });
-    // UserService.getCurrentUser();
-    // print(currentUser.following + "MANTAP");
 
     setState(() {
       ApiServices.getMediaList(category[selectedIndex]).then((medias) => {
@@ -60,55 +55,6 @@ class _MyAccountState extends State<MyAccount> {
             children: [
               Column(
                 children: [
-                  // SizedBox(
-                  //   width: 12,
-                  // ),
-                  // Container(
-                  //   width: MediaQuery.of(context).size.width * 0.7 - 12,
-                  //   height: 70,
-                  //   child: Column(
-                  //     mainAxisAlignment: MainAxisAlignment.start,
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       // SizedBox(height: 36),
-                  //       Text(
-                  //         (currentUser.name != null)
-                  //             ? currentUser.name
-                  //             : "Loading...",
-                  //         maxLines: 1,
-                  //         overflow: TextOverflow.fade,
-                  //         softWrap: false,
-                  //         style: TextStyle(
-                  //           color: filmophileBlue,
-                  //           fontFamily: GoogleFonts.righteous().fontFamily,
-                  //           fontSize: 25,
-                  //         ),
-                  //         textAlign: TextAlign.right,
-                  //       ),
-                  //       Row(
-                  //         children: [
-                  //           Text(
-                  //             (ranks[int.parse(currentUser.rank) - 1] != null)
-                  //                 ? ranks[int.parse(currentUser.rank) - 1]
-                  //                 : "",
-                  //             style: TextStyle(
-                  //               color: filmophileBlue,
-                  //               fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
-                  //               fontSize: 18,
-                  //             ),
-                  //             textAlign: TextAlign.right,
-                  //           ),
-                  //           SizedBox(width: 8),
-                  //           for (int i = 0; i < int.parse(currentUser.rank); i++)
-                  //             Icon(
-                  //               Icons.whatshot_outlined,
-                  //               color: filmophileOrange,
-                  //             ),
-                  //         ],
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
                   Container(
                     height: MediaQuery.of(context).size.width * 0.3,
                     width: MediaQuery.of(context).size.width * 0.3,
@@ -158,24 +104,6 @@ class _MyAccountState extends State<MyAccount> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // Column(
-                      //   children: [
-                      //     Text(
-                      //       "Friends",
-                      //       style: TextStyle(
-                      //         color: filmophileBlue,
-                      //         fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
-                      //         fontSize: 18,
-                      //       ),
-                      //     ),
-                      //     Text("350",
-                      //       style: TextStyle(
-                      //         color: filmophileBlue,
-                      //         fontFamily: GoogleFonts.righteous().fontFamily,
-                      //         fontSize: 25,
-                      //       ),),
-                      //   ],
-                      // ),
                       Column(
                         children: [
                           Text(
@@ -310,7 +238,6 @@ class _MyAccountState extends State<MyAccount> {
       onTap: () {
         setState(() {
           selectedIndex = index;
-          // (context as Element).markNeedsBuild();
         });
       },
       child: Column(

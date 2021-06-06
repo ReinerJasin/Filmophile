@@ -1,5 +1,5 @@
 part of 'models.dart';
 
-class Cast{
-  
+class Cast {
+  // COMING SOON
 }

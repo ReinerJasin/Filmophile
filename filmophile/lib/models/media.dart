@@ -3,11 +3,7 @@ part of 'models.dart';
 class Media {
   String id;
   String judul;
-  // String overview;
-  // String backdrop;
   String poster;
-  // String tanggal;
-  // List<dynamic> genreIds;
 
   // Yang diambil dari firebase
   String status; // Finished || Watching || Not Finished
@@ -18,11 +14,7 @@ class Media {
   Media({
     this.id,
     this.judul,
-    // this.overview,
-    // this.backdrop,
     this.poster,
-    // this.tanggal,
-    // this.genreIds,
     this.status,
     this.timestamp,
     this.isFavorite,
@@ -33,12 +25,7 @@ class Media {
     return Media(
       id: object['id'].toString(),
       judul: object[title],
-      // overview: object['overview'],
-      // backdrop: object['backdrop_path'],
       poster: object['poster_path'],
-      // tanggal: object['release_date'],
-      // genreIds: object['genre_ids'],
     );
   }
-
 }

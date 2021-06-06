@@ -54,8 +54,8 @@ class _SplashState extends State<Splash> {
                     boxShadow: [
                       BoxShadow(
                         color: filmophileBlue.withOpacity(.5),
-                        blurRadius: 30.0, // soften the shadow
-                        spreadRadius: 5.0, //extend the shadow
+                        blurRadius: 30.0,
+                        spreadRadius: 5.0,
                       )
                     ],
                   ),
@@ -85,26 +85,26 @@ class _SplashState extends State<Splash> {
             margin: EdgeInsets.all(2),
             height: MediaQuery.of(context).size.height,
             child: Row(
-              mainAxisAlignment:MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-              Text(
-                "by Reiner Jasin",
-                textAlign: TextAlign.end,
-                style: TextStyle(
-                    color: filmophileBlue,
-                    fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
-                ),
-              ),
-              Text(
-                "version 1.0.0",
-                textAlign: TextAlign.end,
-                style: TextStyle(
-                    color: filmophileBlue,
-                    fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
-                ),
-              ),
-            ]),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    "by Reiner Jasin",
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      color: filmophileBlue,
+                      fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
+                    ),
+                  ),
+                  Text(
+                    "version 1.0.0",
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      color: filmophileBlue,
+                      fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
+                    ),
+                  ),
+                ]),
           ),
         ],
       ),

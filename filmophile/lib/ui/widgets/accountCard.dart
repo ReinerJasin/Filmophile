@@ -22,31 +22,19 @@ class AccountCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print("HELLOOOO");
     List<IconData> addFriend = [
       Icons.person_add_outlined,
       Icons.how_to_reg_outlined
     ];
     List<Color> addFriendColor = [Colors.white, Color(0xFFB9D660)];
 
-  List<String> listRank = ["BRONZE", "SILVER", "GOLD", "PLATINUM", "FILMOPHILE"];
-    // String uid = FirebaseAuth.instance.currentUser.uid;
-    // CollectionReference productCollection = FirebaseFirestore.instance
-    //     .collection("watchlists")
-    //     .doc(uid)
-    //     .collection(type+ media.id);
-
-    // productCollection.get().then((value) {
-    //   value.docs.forEach((element) {
-    //     if (media.id == element["mediaId"]) {
-    //       media.timestamp = element["timestamp"];
-    //     }
-
-    // (context as Element).markNeedsBuild();
-    //   });
-    // });
-
-    // (context as Element).markNeedsBuild();
+    List<String> listRank = [
+      "BRONZE",
+      "SILVER",
+      "GOLD",
+      "PLATINUM",
+      "FILMOPHILE"
+    ];
 
     return GestureDetector(
       onTap: null,
@@ -78,7 +66,7 @@ class AccountCard extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  'Rank #' + (int.parse(index) + 1).toString() ,
+                  'Rank #' + (int.parse(index) + 1).toString(),
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
@@ -96,20 +84,7 @@ class AccountCard extends StatelessWidget {
                     IconButton(
                       icon: Icon(Icons.search),
                       color: Colors.white,
-                      onPressed: () => {
-                        
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => NontonMovie(
-                //               movieId: movie.id,
-                //               movieJudul: movie.judul,
-                //               status: fbMovie.status,
-                //               timestamp: fbMovie.timestamp,
-                //               notes: fbMovie.notes,
-                //               newMovie: newMovie,
-                //             ))),
-                      },
+                      onPressed: () => {},
                     )
                   ],
                 ),
@@ -129,11 +104,10 @@ class AccountCard extends StatelessWidget {
               padding: EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                // mainAxisSize: MainAxisSize.min,
                 children: [
                   Row(
                     children: [
-                      Text( 
+                      Text(
                         listRank[int.parse(rank) - 1] + " ",
                         style: TextStyle(
                           color: filmophileBlue,

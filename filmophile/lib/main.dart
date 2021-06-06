@@ -12,7 +12,7 @@ void enablePlatformOverrideForDesktop() {
   }
 }
 
-void main() async{
+void main() async {
   ErrorWidget.builder = (FlutterErrorDetails details) => Container();
   enablePlatformOverrideForDesktop();
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,13 +31,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => Splash(),
-        Splash.routeName : (context) => Splash(),
-        Login.routeName : (context) => Login(),
-        MainMenu.routeName : (context) => MainMenu(),
-        Register.routeName : (context) => Register(),
-        // DetailMovie.routeName : (context) => DetailMovie(),
-        // 'menu': (context) => Menu(),
-        // History.routeName: (context) => History(),
+        Splash.routeName: (context) => Splash(),
+        Login.routeName: (context) => Login(),
+        MainMenu.routeName: (context) => MainMenu(),
+        Register.routeName: (context) => Register(),
       },
     );
   }

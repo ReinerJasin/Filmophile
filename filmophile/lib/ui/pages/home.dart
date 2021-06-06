@@ -27,13 +27,8 @@ class _HomeState extends State<Home> {
   int refresh = 0;
 
   @override
-
-  // String nameCurrent = FirebaseAuth.instance.currentUser.;
-
   Widget build(BuildContext context) {
-    // print(" MANTAP");
     UserService.getCurrentUser().then((value) {
-      // print(value.name + " MANTAP");
       currentUser = new Users("", value.profilePicture, value.name, "", "", "",
           "", "", "", value.following, value.followers, value.rank);
       if (currentUser != null && refresh == 0) {
@@ -41,8 +36,6 @@ class _HomeState extends State<Home> {
         refresh = 1;
       }
     });
-    // UserService.getCurrentUser();
-    // print(currentUser.name + "MANTAP");
 
     setState(() {
       ApiServices.getMediaList(category[selectedIndex]).then((medias) => {
@@ -67,7 +60,6 @@ class _HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // SizedBox(height: 36),
                       Text(
                         (currentUser.name != null)
                             ? currentUser.name
@@ -126,8 +118,8 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.circular(30)),
               child: TextField(
                 style: TextStyle(
-                      fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
-                      color: filmophileBlue),
+                    fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
+                    color: filmophileBlue),
                 decoration: InputDecoration(
                   hintText: "Search...",
                   hintStyle: TextStyle(
@@ -194,7 +186,6 @@ class _HomeState extends State<Home> {
       onTap: () {
         setState(() {
           selectedIndex = index;
-          // (context as Element).markNeedsBuild();
         });
       },
       child: Column(

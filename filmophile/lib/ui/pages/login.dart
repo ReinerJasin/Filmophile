@@ -129,7 +129,6 @@ class _LoginState extends State<Login> {
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) {
-                              // nanti validator nya di tambah
                               return value.length < 6
                                   ? "Password must have at least 6 characters!"
                                   : null;

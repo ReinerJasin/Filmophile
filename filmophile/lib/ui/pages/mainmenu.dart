@@ -11,7 +11,6 @@ class _MainMenuState extends State<MainMenu> {
   List<int> menu = [0, 1, 2, 3];
 
   static List<Widget> _widgetOptions = <Widget>[
-    //nanti diganti
     Home(),
     Leaderboard(),
     Explore(),
@@ -67,10 +66,8 @@ class _MainMenuState extends State<MainMenu> {
         onTap: _onItemTapped,
         elevation: 0,
         backgroundColor: Color(0xff164E74),
-        // Design buat selected index
         selectedItemColor: Colors.white,
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-        // Design buat unselected index
         unselectedItemColor: Colors.white,
         unselectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
       ),
@@ -78,7 +75,6 @@ class _MainMenuState extends State<MainMenu> {
   }
 
   Widget selectedMenu(int i, int _selectedIndex) {
-    // for(var i = 0; i < menu.length; i++){
     if (i == _selectedIndex) {
       return Container(
         height: 8,
@@ -94,6 +90,5 @@ class _MainMenuState extends State<MainMenu> {
         child: Text(""),
       );
     }
-    // }
   }
 }

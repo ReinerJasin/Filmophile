@@ -230,7 +230,10 @@ class _NontonTvState extends State<NontonTv> {
                                   isLoading = true;
                                 });
 
+                                  print("reinerdebug");
+                                  print(widget.newTV);
                                 if (widget.newTV == "true") {
+                                  print("reiner1");
                                   await MediaServices.addWatchlist(
                                           auth.currentUser.uid,
                                           widget.tvId,
@@ -244,11 +247,9 @@ class _NontonTvState extends State<NontonTv> {
                                     if (value == true) {
                                       ActivityServices.showToast(
                                           "Changes saved!", Colors.green);
-                                      // clearForm();
                                       setState(() {
                                         isLoading = false;
                                       });
-                                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DetailMovie(movieId: widget.movieId,)));
                                       Navigator.pop(context);
                                     } else {
                                       ActivityServices.showToast(
@@ -257,6 +258,7 @@ class _NontonTvState extends State<NontonTv> {
                                     }
                                   });
                                 } else {
+                                  print("reiner2");
                                   await MediaServices.editWatchlist(
                                           auth.currentUser.uid,
                                           widget.tvId,
@@ -270,11 +272,9 @@ class _NontonTvState extends State<NontonTv> {
                                     if (value == true) {
                                       ActivityServices.showToast(
                                           "Changes saved!", Colors.green);
-                                      // clearForm();
                                       setState(() {
                                         isLoading = false;
                                       });
-                                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DetailMovie(movieId: widget.movieId,)));
                                       Navigator.pop(context);
                                     } else {
                                       ActivityServices.showToast(
@@ -283,31 +283,6 @@ class _NontonTvState extends State<NontonTv> {
                                     }
                                   });
                                 }
-
-                                // await MediaServices.addWatchlist(
-                                //         auth.currentUser.uid,
-                                //         widget.tvId,
-                                //         type,
-                                //         ctrlStatus.text,
-                                //         ctrlSeason.text,
-                                //         ctrlEpisode.text,
-                                //         ctrlTimestamp.text,
-                                //         ctrlNotes.text)
-                                //     .then((value) {
-                                //   if (value == true) {
-                                //     ActivityServices.showToast(
-                                //         "Changes saved!", Colors.green);
-                                //     // clearForm();
-                                //     setState(() {
-                                //       isLoading = false;
-                                //     });
-                                //     Navigator.pop(context);
-                                //   } else {
-                                //     ActivityServices.showToast(
-                                //         "Something's wrong, please try again!",
-                                //         Colors.red);
-                                //   }
-                                // });
                               }
                             },
                             child: Container(

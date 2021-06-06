@@ -1,6 +1,6 @@
 part of 'models.dart';
 
-class Genre{
+class Genre {
   String id;
   String name;
 
@@ -15,5 +15,4 @@ class Genre{
       name: object['name'],
     );
   }
-  
 }

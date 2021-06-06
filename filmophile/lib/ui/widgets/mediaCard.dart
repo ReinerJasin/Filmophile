@@ -5,7 +5,8 @@ class MediaCard extends StatelessWidget {
   final Function press;
   final String type;
 
-  const MediaCard({Key key, this.media, this.press, this.type}) : super(key: key);
+  const MediaCard({Key key, this.media, this.press, this.type})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class MediaCard extends StatelessWidget {
     CollectionReference productCollection = FirebaseFirestore.instance
         .collection("watchlists")
         .doc(uid)
-        .collection(type+ media.id);
+        .collection(type + media.id);
 
     productCollection.get().then((value) {
       value.docs.forEach((element) {
@@ -21,11 +22,9 @@ class MediaCard extends StatelessWidget {
           media.timestamp = element["timestamp"];
         }
 
-    (context as Element).markNeedsBuild();
+        (context as Element).markNeedsBuild();
       });
     });
-
-    // (context as Element).markNeedsBuild();
 
     return GestureDetector(
       onTap: press,

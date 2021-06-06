@@ -167,11 +167,9 @@ class _NontonMovieState extends State<NontonMovie> {
                                     if (value == true) {
                                       ActivityServices.showToast(
                                           "Changes saved!", Colors.green);
-                                      // clearForm();
                                       setState(() {
                                         isLoading = false;
                                       });
-                                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DetailMovie(movieId: widget.movieId,)));
                                       Navigator.pop(context);
                                     } else {
                                       ActivityServices.showToast(
@@ -193,11 +191,9 @@ class _NontonMovieState extends State<NontonMovie> {
                                     if (value == true) {
                                       ActivityServices.showToast(
                                           "Changes saved!", Colors.green);
-                                      // clearForm();
                                       setState(() {
                                         isLoading = false;
                                       });
-                                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DetailMovie(movieId: widget.movieId,)));
                                       Navigator.pop(context);
                                     } else {
                                       ActivityServices.showToast(
@@ -206,31 +202,6 @@ class _NontonMovieState extends State<NontonMovie> {
                                     }
                                   });
                                 }
-                                //     await MediaServices.addWatchlist(
-                                //             auth.currentUser.uid,
-                                //             widget.movieId,
-                                //             type,
-                                //             ctrlStatus.text,
-                                //             null,
-                                //             null,
-                                //             ctrlTimestamp.text,
-                                //             ctrlNotes.text)
-                                //         .then((value) {
-                                //       if (value == true) {
-                                //         ActivityServices.showToast(
-                                //             "Changes saved!", Colors.green);
-                                //         // clearForm();
-                                //         setState(() {
-                                //           isLoading = false;
-                                //         });
-                                // // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DetailMovie(movieId: widget.movieId,)));
-                                // Navigator.pop(context);
-                                //       } else {
-                                //         ActivityServices.showToast(
-                                //             "Something's wrong, please try again!",
-                                //             Colors.red);
-                                //       }
-                                //     });
                               }
                             },
                             child: Container(

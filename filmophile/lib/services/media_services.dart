@@ -67,42 +67,11 @@ class MediaServices {
           'current_season': currentSeason,
           'current_episode': currentEpisode,
         });
-        // element.data().update('status', (value) => status);
-        // element.data().update('timestamp', (value) => timestamp);
-        // element.data().update('notes', (value) => notes);
-        //udah bisa update element tinggal update di firebase
       });
     });
     print(status);
     print(timestamp);
     print(notes);
-    //   .doc().update({
-    // 'uid': uid,
-    // 'mediaId': mediaId,
-    // 'type': type,
-    // 'status': status,
-    // 'current_season': currentSeason,
-    // 'current_episode': currentEpisode,
-    // 'timestamp': timestamp,
-    // 'notes': notes,
-    // 'createdAt': dateNow,
-    // 'updatedAt': dateNow,
-    // 'isFavorite': null,
-    //   });
-
-    //     .add({
-    //   'uid': uid,
-    //   'mediaId': mediaId,
-    //   'type': type,
-    //   'status': status,
-    //   'current_season': currentSeason,
-    //   'current_episode': currentEpisode,
-    //   'timestamp': timestamp,
-    //   'notes': notes,
-    //   'createdAt': dateNow,
-    //   'updatedAt': dateNow,
-    //   'isFavorite': null,
-    // });
     return true;
   }
 
@@ -121,9 +90,7 @@ class MediaServices {
         .collection(type + mediaId);
 
     productCollection.get().then((value) {
-      value.docs.forEach((element) {
-        // element.data().updateAll((key, value) => {"isFavorite": isFavorite, "updatedAt": dateNow});
-      });
+      value.docs.forEach((element) {});
 
       if (value.docs.length == 0) {
         print(value.docs.length);
@@ -131,25 +98,6 @@ class MediaServices {
       }
     });
 
-    // productDocument = await productCollection
-    //     .doc(auth.currentUser.uid)
-    //     .collection(type + "#" + mediaId)
-    //     .add({
-    //   'updatedAt': dateNow,
-    //   'isFavorite': null,
-    // })
-
     return true;
   }
-  // static Future<bool> deleteProduct(String id) async {
-  //   bool hsl = true;
-  //   await Firebase.initializeApp();
-  //   await productCollection.doc(id).delete().then((value) {
-  //     hsl = true;
-  //   }).catchError((onError) {
-  //     hsl = false;
-  //   });
-
-  //   return hsl;
-  // }
 }

@@ -6,7 +6,6 @@ class Leaderboard extends StatefulWidget {
 }
 
 class _LeaderboardState extends State<Leaderboard> {
-
   List<Users> listUser = [];
   List<String> ranks = ["Bronze", "Silver", "Gold", "Platinum", "Filmophile"];
   List<String> categories = ["Global", "Following"];
@@ -17,12 +16,11 @@ class _LeaderboardState extends State<Leaderboard> {
 
   @override
   Widget build(BuildContext context) {
-
     UserService.getUsers();
     setState(() {
       UserService.getUsers().then((value) => {
-          listUser = value,
-      });
+            listUser = value,
+          });
     });
 
     UserService.getCurrentUser().then((value) {
@@ -41,7 +39,8 @@ class _LeaderboardState extends State<Leaderboard> {
         height: MediaQuery.of(context).size.height,
         color: Colors.white,
         child: Column(
-          children: [Row(
+          children: [
+            Row(
               children: [
                 SizedBox(
                   width: 12,
@@ -53,7 +52,6 @@ class _LeaderboardState extends State<Leaderboard> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // SizedBox(height: 36),
                       Text(
                         (currentUser.name != null)
                             ? currentUser.name
@@ -112,8 +110,8 @@ class _LeaderboardState extends State<Leaderboard> {
                   borderRadius: BorderRadius.circular(30)),
               child: TextField(
                 style: TextStyle(
-                      fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
-                      color: filmophileBlue),
+                    fontFamily: GoogleFonts.rhodiumLibre().fontFamily,
+                    color: filmophileBlue),
                 decoration: InputDecoration(
                   hintText: "Search...",
                   hintStyle: TextStyle(
@@ -137,51 +135,43 @@ class _LeaderboardState extends State<Leaderboard> {
             ),
             Expanded(
               child: Container(
-                color:filmophileSoftBlue,
+                color: filmophileSoftBlue,
                 child: FutureBuilder(
-                      future: UserService.getUsers(),
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (snapshot.data == null) {
-                          return Container(
-                            child: Center(
-                              child: Text("Loading..."),
-                            ),
-                          );
-                        } else {
-                          return Expanded(
-                            child: GridView.builder(
-                              itemCount: snapshot.data.length,
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 1,
-                                childAspectRatio: 1.558441,
-                              ),
-                              itemBuilder: (context, index) => AccountCard(
-                                name: listUser[index].name,
-                                rank: listUser[index].rank,
-                                movie: listUser[index].movie,
-                                episode: listUser[index].episode,
-                                following: listUser[index].following,
-                                followers: listUser[index].followers,
-                                index: index.toString(),
-                                // press: () => Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             (category[selectedIndex] == "movie")
-                                //                 ? DetailMovie(
-                                //                     movieId: listMedia[index].id)
-                                //                 : DetailTv(tvId: listMedia[index].id))),
-                              ),
-                            ),
-                          );
-                        }
-                      },
-                    ),
+                  future: UserService.getUsers(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.data == null) {
+                      return Container(
+                        child: Center(
+                          child: Text("Loading..."),
+                        ),
+                      );
+                    } else {
+                      return Expanded(
+                        child: GridView.builder(
+                          itemCount: snapshot.data.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            childAspectRatio: 1.558441,
+                          ),
+                          itemBuilder: (context, index) => AccountCard(
+                            name: listUser[index].name,
+                            rank: listUser[index].rank,
+                            movie: listUser[index].movie,
+                            episode: listUser[index].episode,
+                            following: listUser[index].following,
+                            followers: listUser[index].followers,
+                            index: index.toString(),
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                ),
               ),
             ),
           ],
         ),
-        
       ),
     );
   }
@@ -191,7 +181,6 @@ class _LeaderboardState extends State<Leaderboard> {
       onTap: () {
         setState(() {
           selectedIndex = index;
-          // (context as Element).markNeedsBuild();
         });
       },
       child: Column(

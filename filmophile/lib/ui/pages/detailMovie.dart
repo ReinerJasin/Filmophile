@@ -1,7 +1,6 @@
 part of 'pages.dart';
 
 class DetailMovie extends StatefulWidget {
-  // static const String routeName = "/detailMovie";
   final String movieId;
 
   const DetailMovie({Key key, this.movieId}) : super(key: key);
@@ -22,7 +21,7 @@ class _DetailMovieState extends State<DetailMovie> {
 
   bool isLoading = true;
 String newMovie = "false";
-  // Untuk menu
+
   List<String> categories = ["Progress", "Information", "Friends"];
   List<IconData> categories_icon = [
     Icons.bar_chart,
@@ -50,12 +49,7 @@ String newMovie = "false";
         });
     ApiServices.getGenres(movie.genreIds).then((value) => {
           setState(() {
-            // genreList = value;
-            // for (int i = 0; i < genreList.length; i++) {
             genreCard = value;
-            // print("DEBUG 2");
-            // print(genreList);
-            // }
           })
         });
 
@@ -71,6 +65,7 @@ String newMovie = "false";
         fbMovie.timestamp = element["timestamp"];
         fbMovie.notes = element["notes"];
       });
+      print(value.docs.length);
       if (value.docs.length == 0) {
         fbMovie.status = "Not Watched";
         fbMovie.timestamp = "00:00:00";
@@ -78,7 +73,6 @@ String newMovie = "false";
         newMovie = "true";
       }
       isLoading = false;
-      // print("isLoading mati");
     });
     return Scaffold(
       appBar: AppBar(
@@ -128,7 +122,6 @@ String newMovie = "false";
               (movie != null)
                   ? Stack(
                       children: [
-                        // Kalau ada datanya
                         Container(
                           width: double.infinity,
                           height: MediaQuery.of(context).size.width * 11 / 18,
@@ -432,13 +425,6 @@ String newMovie = "false";
                     ],
                   ),
                 ),
-          // Container(
-          //   alignment: Alignment.center,
-          //   height: 4,
-          //   width: 50,
-          //   color:
-          //       selectedIndex == index ? filmophileOrange : Colors.transparent,
-          // ),
         ],
       ),
     );

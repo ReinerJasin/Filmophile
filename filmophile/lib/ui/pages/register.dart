@@ -9,7 +9,6 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
   final ctrlName = TextEditingController();
-  // final ctrlPhone = TextEditingController();
   final ctrlEmail = TextEditingController();
   final ctrlPassword = TextEditingController();
   final ctrlPasswordConfirm = TextEditingController();
@@ -164,7 +163,6 @@ class _RegisterState extends State<Register> {
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) {
-                              // nanti validator nya di tambah
                               return value.length < 6
                                   ? "Password must have at least 6 characters!"
                                   : null;
@@ -239,12 +237,7 @@ class _RegisterState extends State<Register> {
                                         value, Colors.red);
                                   }
                                 });
-
-                                //melanjutkan ke tahap berikutnya
-                                // Navigator.pushReplacementNamed(
-                                //     context, MainMenu.routeName);
                               } else {
-                                //kosongkan aja
                                 Fluttertoast.showToast(
                                     msg: "Please check the fields!",
                                     backgroundColor: Colors.red,
@@ -304,17 +297,6 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
-                          // GestureDetector(
-                          //   onTap: () {
-                          //     Navigator.pushReplacementNamed(
-                          //         context, Login.routeName);
-                          //   },
-                          //   child: Text(
-                          //     "Already registered? Login.",
-                          //     style: TextStyle(
-                          //         color: Colors.deepOrange[400], fontSize: 16),
-                          //   ),
-                          // )
                         ],
                       )),
                 )

@@ -98,7 +98,6 @@ class _ExploreState extends State<Explore> {
   String type;
   Movie fbMovie;
 
-  //untuk menyesuaikan layar dengan gridview
   double gridViewResolution = 0.6666666667;
 
   Users currentUser;
@@ -108,7 +107,6 @@ class _ExploreState extends State<Explore> {
   @override
   Widget build(BuildContext context) {
     UserService.getCurrentUser().then((value) {
-      // print(value.name + " MANTAP");
       currentUser = new Users("", value.profilePicture, value.name, "", "", "",
           "", "", "", value.following, value.followers, value.rank);
       if (currentUser != null && refresh == 0) {
@@ -116,8 +114,6 @@ class _ExploreState extends State<Explore> {
         refresh = 1;
       }
     });
-    // UserService.getCurrentUser();
-    // print(currentUser.name + "MANTAP");
 
     setState(() {
       if (category[selectedIndex] == "movie") {
@@ -126,15 +122,16 @@ class _ExploreState extends State<Explore> {
             .then((medias) => {
                   listMedia = medias,
                 });
-                print("masuk di movie");
-                print("genre nya " + categoryMovie[selectedIndexMovie]);
+        print("masuk di movie");
+        print("genre nya " + categoryMovie[selectedIndexMovie]);
       } else {
-        ApiServices.getMediaListExplore(category[selectedIndex], categoryTv[selectedIndexTv])
+        ApiServices.getMediaListExplore(
+                category[selectedIndex], categoryTv[selectedIndexTv])
             .then((medias) => {
                   listMedia = medias,
                 });
-                print("masuk di TV");
-                print("genre nya " +  categoryTv[selectedIndexTv]);
+        print("masuk di TV");
+        print("genre nya " + categoryTv[selectedIndexTv]);
       }
     });
 
@@ -216,7 +213,6 @@ class _ExploreState extends State<Explore> {
       onTap: () {
         setState(() {
           selectedIndex = index;
-          // (context as Element).markNeedsBuild();
         });
       },
       child: Column(
@@ -253,7 +249,6 @@ class _ExploreState extends State<Explore> {
       onTap: () {
         setState(() {
           selectedIndexMovie = index;
-          // (context as Element).markNeedsBuild();
         });
         print(index.toString());
       },
@@ -263,7 +258,6 @@ class _ExploreState extends State<Explore> {
             color: Colors.transparent,
             margin: EdgeInsets.only(top: 8),
             padding: EdgeInsets.only(left: 16, right: 16),
-            // width: MediaQuery.of(context).size.width * 0.5,
             child: Text(
               categoriesMovie[index],
               textAlign: TextAlign.center,
@@ -293,7 +287,6 @@ class _ExploreState extends State<Explore> {
       onTap: () {
         setState(() {
           selectedIndexTv = index;
-          // (context as Element).markNeedsBuild();
         });
       },
       child: Column(
@@ -302,7 +295,6 @@ class _ExploreState extends State<Explore> {
             color: Colors.transparent,
             margin: EdgeInsets.only(top: 8),
             padding: EdgeInsets.only(left: 16, right: 16),
-            // width: MediaQuery.of(context).size.width,
             child: Text(
               categoriesTv[index],
               textAlign: TextAlign.center,

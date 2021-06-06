@@ -15,12 +15,8 @@ class AuthServices {
 
     UserCredential userCredential = await auth.createUserWithEmailAndPassword(
         email: users.email, password: users.password);
-
-    //kalau ini gak pake await karena langsung ambil dari variable, gak asynchronous
     uid = userCredential.user.uid;
 
-    //pake await karena dia memanggil sebuah fungsi yang bersifat asynchronous
-    // token = await userCredential.user.getIdToken();
     token = await FirebaseMessaging.instance.getToken();
 
     await userCollection.doc(uid).set({
