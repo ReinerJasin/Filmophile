@@ -1,4 +1,5 @@
-# Filmophile - Social Media only for Movie Maniac
+# Filmophile - Social Media for Movie Maniac
+Never lose your movie progress ever again. Filmophile is here to solve your problem. Filmophile is a mobile application designed for movie lovers. With Filmophile, you can get the newest trending movie, record your watching progress, compete with your friends to reach the highest leaderboard as the real movie maniac.
 ---
 
 # Preview
